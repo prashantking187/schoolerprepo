@@ -61,7 +61,8 @@ public class BulkCabinetUpload extends HttpServlet  {
 							                        	else
 							                        		{
 							                        			
-							                        			
+							                        			int cellCount=0;
+							                        			//Iterator<Cell> rowData.cellIterator();
 							                        			
 							                        			
 							                        			

@@ -65,15 +65,27 @@
 	width:inherit;
 	height:inherit;
 }
+.modal-content{
+
+background: #8B8D8D; /* Old browsers */
+background: -moz-linear-gradient(top,  #8B8D8D 50%, #d3d3d3 81%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#8B8D8D), color-stop(81%,#d3d3d3)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #8B8D8D 50%,#d3d3d3 81%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #8B8D8D 50%,#d3d3d3 81%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #8B8D8D 50%,#d3d3d3 81%); /* IE10+ */
+background: linear-gradient(to bottom,  #8B8D8D 50%,#d3d3d3 81%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8B8D8D', endColorstr='#d3d3d3',GradientType=0 ); /* IE6-9 */
+
+}
 .widgetElement{
 
-margin: 70px 150px 151px 280px;
+margin: 20px 150px 151px 280px;
 padding: 2em;
-height: 450px;
+height: 520px;
 width: 400px;
 display: block;
 border: 1px solid rgba(65, 49, 57, 0.5);
-border-radius:20px;
+border-radius: 20px;
 background: rgba(241, 240, 240, 1); /* Old browsers */
 background: -moz-linear-gradient(top,  rgba(201, 198, 198, 1) 0%, rgba(246,246,246,1) 50%, rgba(241,241,241,1) 51%, rgba(241, 240, 240, 1) 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(201, 198, 198, 1)), color-stop(50%,rgba(246,246,246,1)), color-stop(51%,rgba(241,241,241,1)), color-stop(100%,rgba(241, 240, 240, 1))); /* Chrome,Safari4+ */
@@ -241,6 +253,7 @@ padding:1em;
 			<li class="widget"><a href="TelephoneTrack.jsp"><span class="imageClass" ><img src="images/lcd-monitor-icon.png" /></span><span  class="spantext">Street Cabinet Monitoring System</span></a></li>
 			<li class="widget"><a href="http://fibernet.dyndns.info:8085/cgi-bin/reports"><span class="imageClass" ><img src="images/reports-icon.png" /></span><span  class="spantext">Report</span></a></li>
 			<li class="widget"><a data-toggle="modal" data-target="#bulkUploadMarker" href="#modal"><span class="imageClass" ><img src="images/add-marker.png" /></span><span  class="spantext">Bulk Upload Cabinets</span></a></li> 
+			<li class="widget"><a data-toggle="modal" data-target="#markerLst" href="#modal"><span class="imageClass" ><img src="images/delete_icon_blue.ico" /></span><span  class="spantext">Delete Markers</span></a></li>
 		</ul>
 		 <div class="roleList" ></div>
 		
@@ -293,6 +306,9 @@ padding:1em;
 		
 			<!--  Modal code for add marker -->
 	<jsp:include page="AddMarker.jsp"></jsp:include>
+		<!--  Modal code for add marker ENDS -->
+		<!--  Modal code for add marker -->
+	<jsp:include page="MarkerList.jsp"></jsp:include>
 		<!--  Modal code for add marker ENDS -->
 		<!-- bulkUploadMarkers start -->
 	<div class="modal fade" id="bulkUploadMarker" tabindex="-1" role="dialog" aria-labelledby="bulkUploadMarker" aria-hidden="true">
