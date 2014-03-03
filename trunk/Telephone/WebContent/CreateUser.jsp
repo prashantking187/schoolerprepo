@@ -67,14 +67,14 @@
 }
 .modal-content{
 
-background: #8B8D8D; /* Old browsers */
-background: -moz-linear-gradient(top,  #8B8D8D 50%, #d3d3d3 81%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#8B8D8D), color-stop(81%,#d3d3d3)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  #8B8D8D 50%,#d3d3d3 81%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  #8B8D8D 50%,#d3d3d3 81%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  #8B8D8D 50%,#d3d3d3 81%); /* IE10+ */
-background: linear-gradient(to bottom,  #8B8D8D 50%,#d3d3d3 81%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8B8D8D', endColorstr='#d3d3d3',GradientType=0 ); /* IE6-9 */
+background: #E3E7E7; /* Old browsers */
+background: -moz-linear-gradient(top,  #E3E7E7 50%, #9D9FA5 81%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#E3E7E7), color-stop(81%,#9D9FA5)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* IE10+ */
+background: linear-gradient(to bottom,  #E3E7E7 50%,#9D9FA5 81%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E3E7E7', endColorstr='#9D9FA5',GradientType=0 ); /* IE6-9 */
 
 }
 .widgetElement{
@@ -145,10 +145,63 @@ padding:1em;
 
 
 		</style>
+		<script id="listTemplate" type="tabelTemplate">
+	<table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Select</th>
+            <th>Cabinet Name</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody>
+{{tableData}}
+     </tbody>
+    </table>
+		</script>
+	<script id="listTdTemplate" type="tabelTemplate">
+	<tr>
+		<td style="text-align:center"><input type="checkbox" value={{markerVal}} /></td>
+		<td>{{markerName}}</td>
+		<td>{{location}}</td>	
+	</tr>
+		</script>
 		<script>
 		
 		$(function(){
 			
+			$.ajax({
+        		url:'updates?firstCall=yes',
+        		cache:false,
+        		success:function(d){
+        		
+        			var data="";
+        			if(d.length>0)
+        			data=JSON.parse(d);
+        			var tableTempate=$.trim($('#listTemplate').html());
+        			var tempTR=$('<tr/>');
+   
+        			$.each(data,function(){
+        	    		//confirm("S1");
+        				
+        				var boothid=this.boothid;
+        				var boothName=this.boothname;
+        				var locationName=this.location_name;
+					
+        					
+        				var tdTemplate=$.trim($('#listTdTemplate').html());
+        			
+        				tdTemplate=tdTemplate.replace(/{{markerVal}}/,boothid)
+        						  .replace(/{{markerName}}/,boothName)
+        						  .replace(/{{location}}/,locationName);
+        				$(tempTR).append(tdTemplate);
+        				
+        				
+        			});
+        			tableTempate=tableTempate.replace(/{{tableData}}/,$(tempTR).html());
+        			$('#markerLst').find('#listInfo').append(tableTempate);
+        		}
+        		});
 			$('form[name=addUserForm]').submit(function(){
 				
 				var username=$(this).find('input[name=username]').val();

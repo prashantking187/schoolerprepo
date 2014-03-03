@@ -257,11 +257,11 @@ $('button[name=mainMenu]').on('click',function(){
         					var markername=$(this).find('input[name=markername]').val();
         					var lat=$(this).find('input[name=lat]').val();
         					var lng=$(this).find('input[name=lng]').val();
-        				
+        					var locationName=$(this).find('input[name=locationName]').val();
         					$.ajax(
         							{
         								url:"updates?parentPage=telephoneTracker",
-        								data:{"method":"addMarker","markername":markername,"lat":lat,"lng":lng},
+        								data:{"method":"addMarker","markername":markername,"lat":lat,"lng":lng,"locationName":locationName},
         								success:function(data){
         									
         									$('form[name=addMarkerForm]').find('.modal-footer').html(tempModelFooterHtml);

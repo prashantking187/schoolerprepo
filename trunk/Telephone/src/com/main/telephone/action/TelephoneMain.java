@@ -70,6 +70,7 @@ public class TelephoneMain extends HttpServlet  {
 	         String flood_stat = rs.getString("flood_stat");
 	         String humidity = rs.getString("humidity");
 	         String door_status = rs.getString("door_stat");
+	         String location_name = rs.getString("location_name");
 	         JSONObject objJson=new JSONObject();
 	 		
 	     	
@@ -82,6 +83,8 @@ public class TelephoneMain extends HttpServlet  {
 	 	    objJson.accumulate("flood_status", flood_stat);
 	 	    objJson.accumulate("humidity", humidity);
 	 	   objJson.accumulate("door_status", door_status);
+	 	  objJson.accumulate("location_name", location_name);
+	 	   
 
 	 	    objarray.add(objJson);
 		}
@@ -91,6 +94,29 @@ public class TelephoneMain extends HttpServlet  {
 		
 	}
 	
+	public boolean deleteMarker(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+		
+		Connection conn=null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		conn=ds.getConnection();
+		String Query="delete from cabinet_inf where booth_id=?";
+		stmt=conn.prepareStatement(Query);
+		String markerId="";
+		if(req.getParameter("markers")!=null && !"".equalsIgnoreCase(req.getParameter("markers"))){
+			
+			String[] markers=req.getParameter("markers").split("~");
+			
+		}
+		
+			markerId=req.getParameter("locationName");
+		stmt.setInt(1,new Integer(markerId));
+	boolean stat= stmt.execute();
+		return stat;
+		
+		
+		
+	}
 	public String chkBooths(HttpSession session) throws Exception {
 		
 		//driver
@@ -120,6 +146,7 @@ public class TelephoneMain extends HttpServlet  {
 	         String flood_stat = rs.getString("flood_stat");
 	         String humidity = rs.getString("humidity");
 	         String door_status = rs.getString("door_stat");
+	         String location_name = rs.getString("location_name");
 	         JSONObject objJson=new JSONObject();
 	 		
 	     	
@@ -132,6 +159,8 @@ public class TelephoneMain extends HttpServlet  {
 	 	    objJson.accumulate("flood_status", flood_stat);
 	 	    objJson.accumulate("humidity", humidity);
 	 	   objJson.accumulate("door_status", door_status);
+	 	  objJson.accumulate("location_name", location_name);
+	 	  
 	 	 
 	 	    
 	 	 
@@ -270,14 +299,18 @@ public void addMarker(HttpServletRequest req, HttpServletResponse resp) throws S
 	
 	String status="N";
 	
+	String locationName="Default";
 	if(req.getParameter("markername")!=null && !"".equalsIgnoreCase(req.getParameter("markername")))
 		boothname=req.getParameter("markername");
 	if(req.getParameter("lat")!=null && !"".equalsIgnoreCase(req.getParameter("lat")))
 		lat=req.getParameter("lat");
 	if(req.getParameter("lng")!=null && !"".equalsIgnoreCase(req.getParameter("lng")))
 		lng=req.getParameter("lng");
+	if(req.getParameter("locationName")!=null && !"".equalsIgnoreCase(req.getParameter("locationName")))
+		locationName=req.getParameter("locationName");
 	
-	String query="insert into cabinet_inf values(?,?,?,?,?,?,?,?,?,?)";
+	
+	String query="insert into cabinet_inf values(?,?,?,?,?,?,?,?,?,?,?)";
 	
 	PreparedStatement stmt=conn.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
 	String defaultStat="N";
@@ -291,6 +324,7 @@ public void addMarker(HttpServletRequest req, HttpServletResponse resp) throws S
 	stmt.setString(8, defaultStat);
 	stmt.setFloat(9, new Float(0.0));
 	stmt.setString(10, defaultStat);
+	stmt.setString(11, locationName);
 
 	int result=stmt.executeUpdate();
 	
@@ -369,6 +403,8 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 		try {
 		if(req.getParameter("method").equals("addMarker"))
 				addMarker(req,resp);
+		if(req.getParameter("method").equals("delMarker"))
+			deleteMarker(req,resp);
 		
 		else if(req.getParameter("method").equals("addUser"))
 				addUser(req,resp);
