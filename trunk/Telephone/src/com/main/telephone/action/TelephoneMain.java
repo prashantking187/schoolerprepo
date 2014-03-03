@@ -300,6 +300,7 @@ if(req.getParameter("markerInfo")!=null && !"".equalsIgnoreCase(req.getParameter
 		reqCount++;
 		}
 	}
+
 public void addMarker(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException{
 	
 	Connection conn=ds.getConnection();
