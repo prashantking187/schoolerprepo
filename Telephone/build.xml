@@ -21,7 +21,7 @@
 	
 	
 	<target name="war" depends="compile" >
-		<war destfile="cabinetTracker.war" webxml="${web.dir}/WebContent/WEB-INF/web.xml">
+		<war destfile="fibernet.war" webxml="${web.dir}/WebContent/WEB-INF/web.xml">
 		   <fileset dir="${web.dir}/WebContent" />
 		  <classes dir="build/classes" />
 		   </war>
