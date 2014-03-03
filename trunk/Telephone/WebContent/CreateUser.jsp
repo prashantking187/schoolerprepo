@@ -145,27 +145,7 @@ padding:1em;
 
 
 		</style>
-		<script id="listTemplate" type="tabelTemplate">
-	<table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Select</th>
-            <th>Cabinet Name</th>
-            <th>Location</th>
-          </tr>
-        </thead>
-        <tbody>
-{{tableData}}
-     </tbody>
-    </table>
-		</script>
-	<script id="listTdTemplate" type="tabelTemplate">
-	<tr>
-		<td style="text-align:center"><input type="checkbox" value={{markerVal}} /></td>
-		<td>{{markerName}}</td>
-		<td>{{location}}</td>	
-	</tr>
-		</script>
+	
 		<script>
 		
 		$(function(){
@@ -202,6 +182,52 @@ padding:1em;
         			$('#markerLst').find('#listInfo').append(tableTempate);
         		}
         		});
+			$('[name=deleteMarker]').on('click',function(){
+				
+				var loadingImg=$('<center><img src="images/ajax_loading.gif" /></center>');
+				var $form=$(this).closest('form');
+				var tempModelFooterHtml=$form.find(".modal-footer .buttons").clone(true,true);
+				$form.find('.modal-footer').html(loadingImg);
+			
+				var checkedBoxes=$form.find('input[type="checkbox"]:checked');
+				var markerInfo="";
+				$.each(checkedBoxes,function(){
+					
+				//confirm("asda-->"+$(this).val());
+					if(markerInfo=="")
+						markerInfo=$(this).val();
+					else
+						markerInfo+="~"+$(this).val();
+					
+				});
+				//confirm(deletemarkers);
+							$.ajax({
+							 url:"updates?method=delMarker",
+						data:{"markerInfo":markerInfo},
+						success:function(data){ 
+							
+							//confirm(data);
+							var dataArray=data.split("~");
+							 if(dataArray[0]=="200"){
+								bootbox.alert("<img src='images/Success.png' />"+dataArray[1]);
+								$form.find('.modal-footer').html('');
+								$form.find('.modal-footer').append(tempModelFooterHtml);
+								$(checkedBoxes).closest('tr').fadeOut('slow',function(){$(this).remove()});
+							}
+							else if(dataArray[0]=="204"){
+								bootbox.alert("<img src='images/Error.png' />"+dataArray[1]);
+								$form.find('.modal-footer').html('');
+								$form.find('.modal-footer').append(tempModelFooterHtml);
+							}
+							
+						}
+							});
+				//var markername=$(this).find('input[name=markername]').val();
+				//var lat=$(this).find('input[name=lat]').val();
+				//var lng=$(this).find('input[name=lng]').val();
+				//var locationName=$(this).find('input[name=locationName]').val();
+			});
+			
 			$('form[name=addUserForm]').submit(function(){
 				
 				var username=$(this).find('input[name=username]').val();
@@ -239,13 +265,12 @@ padding:1em;
 							url:"updates",
 							data:{"method":"addMarker","markername":markername,"lat":lat,"lng":lng},
 							success:function(data){
-								
 								$('button[data-dismiss="modal"]:visible').trigger('click');
 								var dataArray=data.split("~");
 								if(dataArray[0]=="200")
 									bootbox.alert("<img src='images/Success.png' />"+dataArray[1]);
 								else if(dataArray[0]=="204")
-									bootbox.alert("<img src='images/Error.png' />"+dataArray[1]);
+									bootbox.alert("<img src='images/Success.png' />"+dataArray[1]);
 							}
 							
 						}		
@@ -266,6 +291,7 @@ padding:1em;
 		UserInfoBean objUserInfo=null;
 		String userName="";
 		int role=-1;
+		System.out.println("asdasd");
 		if(session.getAttribute("userInfo")!=null){
 			objUserInfo=(UserInfoBean)session.getAttribute("userInfo");
 			if(objUserInfo.getUsername()!=null)
@@ -284,7 +310,27 @@ padding:1em;
 
 		%>
 		
-		
+			<script id="listTemplate" type="tabelTemplate">
+	<table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Select</th>
+            <th>Cabinet Name</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody>
+{{tableData}}
+     </tbody>
+    </table>
+		</script>
+	<script id="listTdTemplate" type="tabelTemplate">
+	<tr>
+		<td style="text-align:center"><input type="checkbox" value={{markerVal}} /></td>
+		<td>{{markerName}}</td>
+		<td>{{location}}</td>	
+	</tr>
+		</script>
 		<body>
 		<div class="container">
 		<header class="dark">

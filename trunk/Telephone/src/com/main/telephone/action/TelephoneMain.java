@@ -94,28 +94,41 @@ public class TelephoneMain extends HttpServlet  {
 		
 	}
 	
-	public boolean deleteMarker(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+	public void deleteMarker(HttpServletRequest req, HttpServletResponse resp) throws Exception{
 		
 		Connection conn=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
-		conn=ds.getConnection();
-		String Query="delete from cabinet_inf where booth_id=?";
-		stmt=conn.prepareStatement(Query);
-		String markerId="";
-		if(req.getParameter("markers")!=null && !"".equalsIgnoreCase(req.getParameter("markers"))){
+		boolean stat=true;
+		
+if(req.getParameter("markerInfo")!=null && !"".equalsIgnoreCase(req.getParameter("markers"))){
 			
-			String[] markers=req.getParameter("markers").split("~");
+			conn=ds.getConnection();
+			String[] markers=req.getParameter("markerInfo").split("~");
+			PrintWriter outPrintWriter=resp.getWriter();
+			for(String marker:markers){
+				try{
+				String Query="delete from cabinet_inf where booth_id=?";
+				stmt=conn.prepareStatement(Query);				
+				//markerId=req.getParameter("locationName");
+				stmt.setInt(1,new Integer(marker));
+				stmt.execute();
+				}
+				catch(Exception e){				
+					stat=false;
+				}
 			
 		}
-		
-			markerId=req.getParameter("locationName");
-		stmt.setInt(1,new Integer(markerId));
-	boolean stat= stmt.execute();
-		return stat;
-		
-		
-		
+			if(stat==false){
+				
+				outPrintWriter.append("204~Oops!!Something went wrong .Please try again!!");
+				outPrintWriter.flush();
+			}
+			else{
+			outPrintWriter.append("200~Cabinet(s) deleted successfully!!");
+			outPrintWriter.flush();
+			}
+		}
 	}
 	public String chkBooths(HttpSession session) throws Exception {
 		
