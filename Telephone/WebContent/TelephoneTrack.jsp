@@ -21,6 +21,9 @@
 		background: url("images/bg_default.jpg") repeat;
 		
 		}
+		.container{
+		width:1200px;
+		}
 		#map_canvas{
 		
 		border-radius:0px 0px 10px 10px;
@@ -102,35 +105,8 @@
 		
 		
 		}
-		.markerInfo{
-		padding:1em;
-		background: #E3E7E7; /* Old browsers */
-background: -moz-linear-gradient(top,  #E3E7E7 50%, #9D9FA5 81%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#E3E7E7), color-stop(81%,#9D9FA5)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* IE10+ */
-background: linear-gradient(to bottom,  #E3E7E7 50%,#9D9FA5 81%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E3E7E7', endColorstr='#9D9FA5',GradientType=0 ); /* IE6-9 */
-		}
-	.infobox-wrapper {
-    display:none;
-}
-#infobox {
-    border:2px solid black;
-    margin-top: 8px;
-    background:#333;
-    color:#FFF;
-    font-family:Arial, Helvetica, sans-serif;
-    font-size:12px;
-    padding: .5em 1em;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    text-shadow:0 -1px #000000;
-    -webkit-box-shadow: 0 0  8px #000;
-    box-shadow: 0 0 8px #000;
-}
+		
+	
 		</style>
 		<%
 		UserInfoBean objUserInfo=null;
@@ -154,7 +130,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E3E7E7', end
 
 		%>
 		<script type="text/javascript" src="js/modernizr-2.0.6/modernizr.min.js"></script>
-		<script src="js/infobox.js" type="text/javascript"></script>
 		<script>
 		$(function(){
 $('button[name=signout]').on('click',function(){
@@ -175,7 +150,7 @@ $('button[name=mainMenu]').on('click',function(){
 		<div class="container">
 		<header class="dark">
 			<span >Welcome <label> <%=userName %></label></span>
-		
+		<img src="images/rm.png" style="width: 100px;margin-left: 270px;" ></img>
 			<button class="btn btn-sm btn-primary" type="submit" style="float:right" name="signout" >Sign out</button>
 			<% 
 			if(role==1){%>
@@ -214,7 +189,6 @@ $('button[name=mainMenu]').on('click',function(){
     //default markers
     
     var markers=[];
-    var infobox=[];
     
     
     var mapObj;
@@ -415,6 +389,7 @@ $('button[name=mainMenu]').on('click',function(){
         		
      var source=new EventSource('updates');
     source.onmessage=function(e){
+    	confirm(e.data);
     	if(typeof mapObj !="undefined" && typeof  e.data !="undefined"){
     	var data=JSON.parse(e.data);
     	//confirm(e.data);
@@ -489,7 +464,7 @@ $.each(markers,function(i){
 			});
             function prepareHTML(boothname,boothid,door_status,smoke_status,flood_status,markerStat,humidity){
             	
-       		 var tempHTML='<div name="markerInfoDiv" class="markerInfo" ><div class="markerInfoHeader"><span>Cabinet Status</span></div><div class="markerInfoContent">'+
+       		 var tempHTML='<div name="markerInfoDiv" ><div class="markerInfoHeader"><span>Cabinet Status</span></div><div class="markerInfoContent">'+
 			 '<ul><li><div class="row"><div class="col-md-5">Cabinet id :</div> <div class="col-md-5">'+boothid+'</div></div></li><li><div class="row"><div class="col-md-5">Temperature info :</div><div class="col-md-5"> 25c</div> </div></li>'+
 			 '<li><div class="row"><div class="col-md-5">Cabinet name :</div> <div class="col-md-5">'+boothname+'</div></div></li>'+
 			 '<li><div class="row" ><div class="col-md-5">Door Status :</div><div class="col-md-5">'+door_status+'</div></div> </li>'+

@@ -23,7 +23,9 @@
 		.container{
 		padding: 1em;
 		}
-		
+		.container{
+		width:1200px;
+		}
 			.dark{
 		position: relative;
 		border-radius: 10px 10px 0px 0px;
@@ -348,7 +350,7 @@ if(request.getAttribute("userAlertBulk")!=null)
 		<body>
 		<div class="container">
 		<header class="dark">
-			<span >Welcome <label><%=userName %></label></span>
+			<span >Welcome <label><%=userName %></label></span><img src="images/rm.png" style="width: 100px;margin-left: 270px;" ></img>
 			<button class="btn btn-sm btn-primary" type="submit" style="float:right" name="signout" >Sign out</button>
 		</header>
 		<div class="widgetContainer">
