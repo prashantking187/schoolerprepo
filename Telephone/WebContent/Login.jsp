@@ -26,7 +26,7 @@
   
 body{
 			
-		background: url("images/bg_default.jpg");
+		background: url("images/login_logo_left.jpg") no-repeat 80%;
 		font-size:1.35em;
 		
 		}
@@ -43,6 +43,7 @@ color:#fff;
 .loginDetails{
 
 margin-left: 30%;
+padding-left:5em;
 margin-top: 25%;
 
 }
