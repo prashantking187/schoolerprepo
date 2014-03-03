@@ -145,11 +145,25 @@ padding:1em;
 
 
 		</style>
-	
+	<%
+String alertBulk="";
+if(request.getAttribute("userAlertBulk")!=null)
+	alertBulk=(String)request.getAttribute("userAlertBulk");
+ %>
 		<script>
 		
 		$(function(){
 			
+			var alertInfoBulk='<%=alertBulk%>';
+			//confirm(alertInfoBulk.length);
+			//confirm(alertInfoBulk);
+			  if(alertInfoBulk!=null && alertInfoBulk !='' && alertInfoBulk.length>0){
+				  var dataInfo=alertInfoBulk.split("~");
+				  if(dataInfo[0]=="200")
+				  	bootbox.alert("<img src='images/Success.png' />"+dataInfo[1]);
+				  else
+					 bootbox.alert("<img src='images/Error.png' />"+dataInfo[1]);
+			  }
 			$.ajax({
         		url:'updates?firstCall=yes',
         		cache:false,
