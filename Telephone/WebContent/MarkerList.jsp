@@ -8,7 +8,8 @@ height: 450px;
 overflow: auto;
 }
 </style>
-<div class="modal fade" id="markerLst" id="c" tabindex="-1" role="dialog" aria-labelledby="markerLstLabel" aria-hidden="true">
+<div class="modal fade" id="markerLst"  tabindex="-1" role="dialog" aria-labelledby="markerLstLabel" aria-hidden="true">
+	<form>
   		<div class="modal-dialog">
     		<div class="modal-content">
     			
@@ -20,10 +21,14 @@ overflow: auto;
 
     			</div>
     			<div class="modal-footer">
+    				<div class="buttons">
         				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        					<button type="submit" class="btn btn-primary" data-loading-text="Saving...">Delete</button>
+        					<button type="button" name="deleteMarker" class="btn btn-primary" data-loading-text="Saving...">Delete</button>
+        			</div>
       				</div>
     	</div><!-- /.modal-content -->
+    	
   	</div><!-- /.modal-dialog -->
+  	</form>
 </div>
 </html>
