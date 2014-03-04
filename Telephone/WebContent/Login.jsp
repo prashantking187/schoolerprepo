@@ -146,7 +146,7 @@ if(request.getAttribute("userAlert")!=null)
    <div class="col-sm-12">
       <img alt="logo" src="images/logo_Symbol_Icon.png" style="width: 50px;
 height: 50px;
-padding: .5em;"/><span>MOBILY FDH MONITORING SYSTEM</span>
+padding: .5em;"/><span style="#019DDD">MOBILY FDH MONITORING SYSTEM</span>
     </div>
     <div class="col-sm-7">
       <input type="text" class="form-control" id="username" name="username" placeholder="User Name"  required="required">
