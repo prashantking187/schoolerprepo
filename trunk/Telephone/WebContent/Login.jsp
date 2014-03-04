@@ -10,9 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-  
-
-    
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -26,13 +23,13 @@
   
 body{
 			
-		background: url("images/login_logo_left.jpg") no-repeat 80%;
-		font-size:1.35em;
+			overflow-y:hidden;
+		background: url("images/bg_default.jpg") repeat;
+		font-size: 1.35em;
 		
 		}
   
 .container {
-
  color: #eee;
 }
 
@@ -42,14 +39,14 @@ color:#fff;
 }
 .loginDetails{
 
-margin-left: 30%;
-padding-left:5em;
-margin-top: 25%;
+margin-left: 60%;
+padding-left:5em; 
+margin-top: 15%;
 
 }
 #dangeralert{
 
-margin: -5% 0% 2% 23%;
+margin: -5% 0% 2% 53%;
 width: 500px;
 position: absolute;
 }
@@ -59,8 +56,20 @@ height: auto;
 padding: 2em;
 width: 400px;
 border: 4px solid rgb(191, 191, 209);
-background: url("images/grey_white_bg.jpg") repeat;
+background: url("images/grey_white_bg.jpg") no-repeat;
+background-size:150%;
 color: black;
+}
+.logo-fixed{
+
+position: absolute;
+background: url("images/login_logo_left.jpg") no-repeat;
+background-size: 70% 100%;
+width: 100%;
+top: 0px;
+height: 100%;
+display: block;
+left: -10%;
 }
   </style>
  
@@ -123,7 +132,7 @@ if(request.getAttribute("userAlert")!=null)
     <div class="container">
     
 <div class="container-content" >
-
+	<div class="logo-fixed"></div>
       <form class="form-horizontal loginform" role="form" action="loginaction" method="post" name="loginform" >
     <div class="alert alert-danger alert-dismissable fade" id="dangeralert" >
   		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -132,22 +141,24 @@ if(request.getAttribute("userAlert")!=null)
 <div class="loginDetails">
 	<div class="login">
 	 <div class="form-group">
-    <img alt="User Logo" src="images/RM_LOGO_SMALL.jpg" class="col-sm-offset-5 col-sm-10 " style="width:100px"/>
   </div>
   <div class="form-group">
-    <label for="username" class="col-sm-5 control-label">User Name</label>
+   <div class="col-sm-12">
+      <img alt="logo" src="images/logo_Symbol_Icon.png" style="width: 50px;
+height: 50px;
+padding: .5em;"/><span>MOBILY FDH MONITORING SYSTEM</span>
+    </div>
     <div class="col-sm-7">
       <input type="text" class="form-control" id="username" name="username" placeholder="User Name"  required="required">
     </div>
   </div>
   <div class="form-group">
-    <label for="password" class="col-sm-5 control-label">Password</label>
     <div class="col-sm-7 ">
       <input type="password" class="form-control" id="password" name ="password" placeholder="Password" required="required">
     </div>
   </div>
   <div class="form-group">
-    <div class="col-sm-offset-5 col-sm-10">
+    <div class=" col-sm-7">
       <div class="checkbox">
         <label>
           <input type="checkbox" name="rememberme" id="rememberme"> Remember me
@@ -156,8 +167,13 @@ if(request.getAttribute("userAlert")!=null)
     </div>
   </div>
   <div class="form-group">
-    <div class="col-sm-offset-5 col-sm-10">
+    <div class="col-sm-7">
       <button type="submit" class="btn btn-primary">Sign in</button>
+    </div>
+    <div class="col-sm-7">
+      <img alt="logo" src="images/rm.png" style="width: 50px;
+height: 50px;
+padding: .5em;"/>
     </div>
   </div>
  </div></div>
