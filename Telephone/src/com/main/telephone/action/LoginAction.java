@@ -18,6 +18,7 @@ import javax.sql.DataSource;
 
 import com.main.telephone.DTO.UserInfoBean;
 import com.main.telephone.util.PhoneUtil;
+import java.sql.Timestamp;
 
 import java.sql.PreparedStatement;
 
@@ -25,7 +26,7 @@ public class LoginAction extends HttpServlet{
 
 	
 	@Resource(name="jdbc/phonedb")
-	private DataSource ds;
+	private static DataSource ds;
 	private String userAlert="";
 	
 
@@ -80,12 +81,14 @@ public class LoginAction extends HttpServlet{
 		    	objUserInfoBean.setRole(role);
 		    	
 		    	req.getSession().setAttribute("userInfo", objUserInfoBean);
+		    	saveUserInfo(req, resp ,objUserInfoBean);
 		    	if(role == 0)
 		    		forwardString="/Login.jsp";
 		    	else if(role ==1)
 		    		forwardString ="/CreateUser.jsp";
 		    	else if (role ==2)
 		    		forwardString ="/TelephoneTrack.jsp";
+		    	
 		    }
 		    else{
 		    	forwardString ="/Login.jsp";
@@ -110,4 +113,17 @@ public class LoginAction extends HttpServlet{
 				 dispatch=getServletContext().getRequestDispatcher(forwardString);
 				 dispatch.forward(req, resp);
 	}
+	
+	public static void saveUserInfo(HttpServletRequest req, HttpServletResponse resp,UserInfoBean objUserInfoBean) throws SQLException{
+		
+		Connection conn=ds.getConnection();
+		String query="insert into login_info values(?,?)";
+		PreparedStatement  st1=conn.prepareStatement(query);
+		st1.setInt(1, objUserInfoBean.getUser_id());
+		java.util.Date date= new java.util.Date();
+		st1.setTimestamp(2,new Timestamp(date.getTime()));
+		st1.execute();
+		conn.close();
+	}
+	
 }
