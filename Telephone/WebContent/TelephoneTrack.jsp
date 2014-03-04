@@ -106,7 +106,26 @@
 		
 		}
 		
-	
+	.logo_top_left{
+position: absolute;
+top: 10px;
+left: 5px;
+background: url("images/logo_Symbol_Icon.png") no-repeat;
+background-size: contain;
+width: 50px;
+height: 50px
+
+}
+.logo_bottom_right{
+position: absolute;
+top: 90%;
+left: 90%;
+background: url("images/rm.png") no-repeat;
+background-size: contain;
+width: 100px;
+height: 50px
+
+}
 		</style>
 		<%
 		UserInfoBean objUserInfo=null;
@@ -148,9 +167,17 @@ $('button[name=mainMenu]').on('click',function(){
     </head>
    <body>
 		<div class="container">
+				<div class="logo_top_left"><span style="white-space: nowrap;
+				font-size: 7px;
+				color: #019DDD;
+				left: 50px;
+				top: 30px;
+				position: absolute;
+				text-transform: uppercase;">Mobily FDH Monitoring System</span></div>
+		<div class="logo_bottom_right"></div>
 		<header class="dark">
 			<span >Welcome <label> <%=userName %></label></span>
-		<img src="images/rm.png" style="width: 100px;margin-left: 270px;" ></img>
+		
 			<button class="btn btn-sm btn-primary" type="submit" style="float:right" name="signout" >Sign out</button>
 			<% 
 			if(role==1){%>
