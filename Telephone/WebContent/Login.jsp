@@ -171,7 +171,7 @@ padding: .5em;"/><span>MOBILY FDH MONITORING SYSTEM</span>
       <button type="submit" class="btn btn-primary">Sign in</button>
     </div>
     <div class="col-sm-7">
-      <img alt="logo" src="images/rm.png" style="width: 50px;
+      <img alt="logo" src="images/rm.png" style="width: 100px;
 height: 50px;
 padding: .5em;"/>
     </div>
