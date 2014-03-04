@@ -263,6 +263,10 @@ if(request.getAttribute("userAlertBulk")!=null)
 				//var locationName=$(this).find('input[name=locationName]').val();
 			});
 			
+			$('button[name=selectAll]').on('click',function(){				
+				$(this).closest('form').find('input[type=checkbox]').attr('checked','checked');
+			});
+			
 			$('form[name=addUserForm]').submit(function(){
 				
 				var username=$(this).find('input[name=username]').val();
