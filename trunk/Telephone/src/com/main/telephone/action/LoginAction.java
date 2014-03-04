@@ -119,7 +119,7 @@ public class LoginAction extends HttpServlet{
 		Connection conn=ds.getConnection();
 		String query="insert into login_info values(?,?)";
 		PreparedStatement  st1=conn.prepareStatement(query);
-		st1.setInt(1, objUserInfoBean.getUser_id());
+		st1.setString(1, objUserInfoBean.getUsername());
 		java.util.Date date= new java.util.Date();
 		st1.setTimestamp(2,new Timestamp(date.getTime()));
 		st1.execute();
