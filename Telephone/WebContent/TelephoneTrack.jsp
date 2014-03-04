@@ -126,6 +126,25 @@ width: 100px;
 height: 50px
 
 }
+.infobox-wrapper {
+    display:none;
+}
+#infobox {
+    border:2px solid black;
+    margin-top: 8px;
+    background:#333;
+    color:#FFF;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    padding: .5em 1em;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    text-shadow:0 -1px #000000;
+    -webkit-box-shadow: 0 0  8px #000;
+    box-shadow: 0 0 8px #000;
+}
+
 		</style>
 		<%
 		UserInfoBean objUserInfo=null;
@@ -149,6 +168,31 @@ height: 50px
 
 		%>
 		<script type="text/javascript" src="js/modernizr-2.0.6/modernizr.min.js"></script>
+		<script type="infowindowTemplate" id="infoWindowTemplate">
+		<div id="infobox" >
+		<table class="table table-bordered" >
+    		<thead style="background: rgb(238, 149, 35);color: black;" >
+    			<tr>
+    				<th>Cabinet Name/ID</th>
+    				<th>Door Status</th>
+    				<th>Smoke Status</th>
+    				<th>Flood Status</th>
+					<th>Humidity</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    			<tr>
+    				<td style="text-align:center">{{cabinetid}}</td>
+    				<td style="text-align:center">{{doorstatus}}</td>
+    				<td style="text-align:center">{{smokestatus}}</td>
+    				<td style="text-align:center">{{floodstatus}}</td>
+					<td style="text-align:center">{{humidity}}</td>
+    			</tr>
+    
+    </tbody>
+    </table>
+</div>
+		</script>
 		<script>
 		$(function(){
 $('button[name=signout]').on('click',function(){
@@ -199,6 +243,7 @@ $('button[name=mainMenu]').on('click',function(){
 		<script type="text/javascript" src="ui/jquery.ui.map.services.js"></script>
 		<script type="text/javascript" src="ui/jquery.ui.map.extensions.js"></script>
 		<script type="text/javascript" src="js/eventsource.js"></script>
+		<script type="text/javascript" src="js/infobox.js"></script>
 		<script type="text/javascript">
 		
 	
@@ -299,37 +344,11 @@ $('button[name=mainMenu]').on('click',function(){
         									var dataArray=data.split("~");
    
         									var newdata=JSON.parse(dataArray[0]);
-        									var lat=newdata[0].lat;
-        			        				var lng=newdata[0].lng;
-        			        				var boothid=newdata[0].boothid;
-        			        				var markerStat=newdata[0].status;
-        			        				var smoke_status=newdata[0].smoke_status;
-        			        				var flood_status=newdata[0].flood_status;
-        			        				var door_status=newdata[0].door_status;
-        			        				var humidity=newdata[0].humidity;
-        			        				var boothname=newdata[0].boothname;
+
         
         									if(dataArray[1]=="200"){
         										
-        										
-        										 var marker = new google.maps.Marker({
-        				        					    position: new google.maps.LatLng(lat, lng),
-        				        					    map: mapObj,
-        				        					    icon:imageRed,
-        				        					    id:boothid,
-        				        					    bounds:true
-        				        					    
-        				        					  });
-        										 
-        										 markers.push(marker);
-        										 var tempHTML=	prepareHTML(boothname,boothid,door_status,smoke_status,flood_status,markerStat,humidity)
-        				        				 
-        				        				
-        				        				 $(marker).click(function() {
-        				        					 var idinfo=String(this.id);
-        				        						$('#map_canvas').gmap('openInfoWindow', {'content':tempHTML}, this);
-        				        					});
-        										
+        										prepareMarkers(newdata[0],the_map);
         										bootbox.alert("<img src='images/Success.png' />"+dataArray[2]);
         										
 			
@@ -346,66 +365,11 @@ $('button[name=mainMenu]').on('click',function(){
         					return false;
         				});
         				
-        			$.each(data,function(evt,map){
-        	    		//confirm("S1");
-        				var lat=this.lat;
-        				var lng=this.lng;
-        				var boothid=this.boothid;
-        				var status=this.status;
-        				var smoke_status=this.smoke_status;
-        				var flood_status=this.flood_status;
-        				var door_status=this.door_status;
-        				var humidity=this.humidity;
-        				
-        				if(smoke_status!=null && smoke_status!="" && smoke_status=='Y')
-        						smoke_status="YES"
-        					else
-        						smoke_status="NO"
-        				if(flood_status!=null && flood_status!="" && flood_status=='Y')
-        					flood_status="YES"
-                		else
-                			flood_status="NO"		
-                		if(door_status!=null && door_status!="" && door_status=='Y')
-                			door_status="YES"
-                        else
-                        	door_status="NO"
-        				var markerStat="Active";
-        				var boothname=this.boothname;
-        				if(status=='N'){
-        					image=imageRed;
-        					markerStat="Inactive"
-        				}
-        				else{
-        					image=imageGreen;
-        					markerStat="Active"
-        				}
-						
-        				
-        				 var marker = new google.maps.Marker({
-        					    position: new google.maps.LatLng(lat, lng),
-        					    map: the_map,
-        					    icon:image,
-        					    id:boothid,
-        					    bounds:true
-        					    
-        					  });
-        				 //confirm(boothid+","+status);
-        				 
-        		var tempHTML=	prepareHTML(boothname,boothid,door_status,smoke_status,flood_status,markerStat,humidity)
-        				 
-        				 
-        				 $(marker).click(function() {
-        					 var idinfo=String(this.id);
-        						$('#map_canvas').gmap('openInfoWindow', {'content':tempHTML}, this);
-        					});
-        					  markers.push(marker);
-        				//var markInfo={'id':id, 'icon':image,'position': new google.maps.LatLng(lat, lng), 'bounds':true,'map':map };
-        				//addMarker(markInfo);
-        				
+        			$.each(data,function(evt,map){    		
+        			prepareMarkers(this,the_map);
         			});
-        		var latlng=new google.maps.LatLng('21.0000','78.0000');
+        			var latlng=new google.maps.LatLng('21.0000','78.0000');
         			the_map.setCenter(latlng);
-        		//confirm(marker1);
         			mapObj=the_map;
         			});
         			//default map loading focusing india
@@ -415,97 +379,169 @@ $('button[name=mainMenu]').on('click',function(){
         			
         		
      var source=new EventSource('updates');
-    source.onmessage=function(e){
-    	confirm(e.data);
-    	if(typeof mapObj !="undefined" && typeof  e.data !="undefined"){
-    	var data=JSON.parse(e.data);
-    	//confirm(e.data);
-    	//$('#map_canvas').gmap('refresh');
-    //	$('#map_canvas').gmap().bind('init', function() {
-    	//	confirm("in");
+    	source.onmessage=function(event){
+    	if(typeof mapObj !="undefined" && typeof  event.data !="undefined"){
+    	var data=JSON.parse(event.data);
     	$.each(data,function(evt,map){
-    		//confirm("S");
-			var lat=this.lat;		
-			var lng=this.lng;
-			var id=this.boothid;
-			var status=this.status;
 
-			if(status=='N')
+		
+
+			var lat=this.lat;
+			var lng=this.lng;
+			var boothid=this.boothid;
+			var smoke_status=this.smoke_status;
+			var flood_status=this.flood_status;
+			var door_status=this.door_status;
+			var humidity=this.humidity;
+			var boothname=this.boothname;
+			
+			if(door_status=='N' || smoke_status=='N' || flood_status=='N'){
 				image=imageRed;
-			else
+			}
+			else{
 				image=imageGreen;
+			}
+			
+			var tempHTML=	prepareHTML(boothname,boothid,statusToImage(door_status),statusToImage(smoke_status),statusToImage(flood_status),humidity);
+			 
+			
+			var infobox = new InfoBox({
+				 content: tempHTML,
+				 disableAutoPan: false,
+				 maxWidth: 150,
+				 pixelOffset: new google.maps.Size(-140, 0),
+				 zIndex: null,
+				 boxStyle: {
+				    background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
+				    opacity: 0.75,
+				    width: "580px"
+				},
+				closeBoxMargin: "12px 4px 2px 2px",
+				closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
+				infoBoxClearance: new google.maps.Size(1, 1)
+				});
+
+			 
+			//markers.push(marker);
+        	
+        	
 			//confirm(id+"," +status);
 $.each(markers,function(i){
-	if(id==this.id){
+	if(boothid==this.id){
 		//confirm(status);
 	var marker=markers[i];		
 		marker.setIcon(image);
+		google.maps.event.clearListeners(marker,'click');
+		google.maps.event.addListener(marker, 'click', function() {
+			 infobox.open(mapObj,marker);
+		});
+		
 	}
 });
 
 
-		       /*  $('#map_canvas').gmap('addMarker', { 'tags':id, 'position': new google.maps.LatLng(lat, lng), 'bounds':true });
-		        $('#map_canvas').gmap('find', 'markers', { 'property': 'tags', 'value': id }, function(marker, isFound) {
-	                if ( isFound ) {
-	                        confirm("ada");
-	                } else {
-	                        confirm("poda");
-	                }
-	        }); */
-	       
-
-	       
-	        //map.addMarker( {'id':"5", 'icon':image,'position': new google.maps.LatLng('11.0183','76.9725'), 'bounds':true });
 		    
 		});
-			//$('#map_canvas').gmap('addMarker', {'tags':id, 'icon':image,'position': new google.maps.LatLng(lat, lng), 'bounds':true } );
+			
     }
 			
        
-		//});
     	
-    	
-    } 
-        	
-        			//var markers = $('#map_canvas').gmap('get', 'markers');
-        			//confirm("ss"+markers);
-        			//var map = $('#map_canvas').gmap('get', 'map');
-
-                		
-        			}
-        			
-			
-        	});
-			
-			
+    }                		
+        			}			
+        	});			
 		}
-	
 	
             $(function() { 
             	
-            	$('#map_canvas').html('<center><img src="images/ajax-loader.gif" /></center>');
-            	//$('#map_canvas').gmap({'center': ' 15.0000, 75.0000', 'zoom':5});
-            //calling ajax at regular intervals to check if the telephone is getting used
-       getBoothStat();
+            	$('#map_canvas').html('<center><img src="images/ajax-loader.gif" /></center>');//default loading image
+      		 	getBoothStat();//first call to get all the markers
 
 			});
-            function prepareHTML(boothname,boothid,door_status,smoke_status,flood_status,markerStat,humidity){
-            	
-       		 var tempHTML='<div name="markerInfoDiv" ><div class="markerInfoHeader"><span>Cabinet Status</span></div><div class="markerInfoContent">'+
-			 '<ul><li><div class="row"><div class="col-md-5">Cabinet id :</div> <div class="col-md-5">'+boothid+'</div></div></li><li><div class="row"><div class="col-md-5">Temperature info :</div><div class="col-md-5"> 25c</div> </div></li>'+
-			 '<li><div class="row"><div class="col-md-5">Cabinet name :</div> <div class="col-md-5">'+boothname+'</div></div></li>'+
-			 '<li><div class="row" ><div class="col-md-5">Door Status :</div><div class="col-md-5">'+door_status+'</div></div> </li>'+
-			 '<li><div class="row" ><div class="col-md-5">Smoke Status :</div><div class="col-md-5"> '+smoke_status+'</div></div> </li>'+
-			 '<li><div class="row" ><div class="col-md-5">Flood Status :</div><div class="col-md-5">'+flood_status+'</div></div> </li>'+
-			 '<li><div class="row"><div class="col-md-5">Cabinet Status :</div><div class="col-md-5"> '+markerStat+'</div></div> </li>'+
-			 '<li><div class="row"><div class="col-md-5">Humidity :</div><div class="col-md-5"> '+humidity+'</div></div> </li>'+
-			 '</div></ul>';
+            function prepareHTML(boothname,boothid,door_status,smoke_status,flood_status,humidity){
+
+       		 var tempHTML=$('<div id="wrapper" />');
 			 
-			 return tempHTML;
+			 var template=$.trim($('#infoWindowTemplate').html());
+			 template=template.replace(/{{cabinetid}}/,boothname)
+			 				  .replace(/{{doorstatus}}/,door_status)
+			 				  .replace(/{{smokestatus}}/,smoke_status)
+			 				  .replace(/{{floodstatus}}/,flood_status)
+			 				  .replace(/{{humidity}}/,humidity);
+			 $(tempHTML).append(template);		  
+			 //confirm($(tempHTML).html());
+			
+			 return $(tempHTML).html();
             	
             }
+            function prepareMarkers(data,the_map){
+            	
+    			var lat=data.lat;
+				var lng=data.lng;
+				var boothid=data.boothid;
+				var smoke_status=data.smoke_status;
+				var flood_status=data.flood_status;
+				var door_status=data.door_status;
+				var humidity=data.humidity;
+			
+				
+				
+				var boothname=data.boothname;
+				if(door_status=='N' || smoke_status=='N' || flood_status=='N'){
+					image=imageRed;
+				}
+				else{
+					image=imageGreen;
+				}
+				
+				
+				 var marker = new google.maps.Marker({
+					    position: new google.maps.LatLng(lat, lng),
+					    map: the_map,
+					    icon:image,
+					    id:boothid,
+					    bounds:true
+					    
+					  });
+				 //confirm(boothid+","+status);
+				 
+				var tempHTML=	prepareHTML(boothname,boothid,statusToImage(door_status),statusToImage(smoke_status),statusToImage(flood_status),humidity);
+				 
+				
+				var infobox = new InfoBox({
+					 content: tempHTML,
+					 disableAutoPan: false,
+					 maxWidth: 150,
+					 pixelOffset: new google.maps.Size(-140, 0),
+					 zIndex: null,
+					 boxStyle: {
+					    background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
+					    opacity: 0.75,
+					    width: "580px"
+					},
+					closeBoxMargin: "12px 4px 2px 2px",
+					closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
+					infoBoxClearance: new google.maps.Size(1, 1)
+					});
+
+				 $(marker).click(function() {
+					 infobox.open(the_map,this);
+					});
+				markers.push(marker);
+            	
+            	
+            	
+            }
+            function statusToImage(status){
+            	
+            	
+            	if(status=='Y')
+            		return '<img src="images/Circle_Green.png" />';
+            	else
+            		return '<img src="images/Circle_Red.png" />';
+            }
         </script>
-      
+      	
     </div>
     	<jsp:include page="AddMarker.jsp"></jsp:include>
 	</body>

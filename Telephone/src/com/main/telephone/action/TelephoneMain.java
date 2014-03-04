@@ -279,7 +279,9 @@ if(req.getParameter("markerInfo")!=null && !"".equalsIgnoreCase(req.getParameter
 		try {
 			chkBooths(session);//retrieving data from the cabinet_inf table
 			if(req.getParameter("firstCall")==null)
-			chkExisting(session);//comparing the data with session data and updating markers if necessary
+				chkExisting(session);//comparing the data with session data and updating markers if necessary
+			else
+				session.setAttribute("markerVal", markers);
 	
 	
 		} catch (Exception e) {
@@ -311,7 +313,7 @@ public void addMarker(HttpServletRequest req, HttpServletResponse resp) throws S
 	
 	String lng="";
 	
-	String status="N";
+	String status="Y";
 	
 	String locationName="Default";
 	if(req.getParameter("markername")!=null && !"".equalsIgnoreCase(req.getParameter("markername")))
@@ -327,7 +329,7 @@ public void addMarker(HttpServletRequest req, HttpServletResponse resp) throws S
 	String query="insert into cabinet_inf values(?,?,?,?,?,?,?,?,?,?,?)";
 	
 	PreparedStatement stmt=conn.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
-	String defaultStat="N";
+	String defaultStat="Y";
 	stmt.setNull(1,Types.INTEGER);
 	stmt.setString(2, boothname);
 	stmt.setInt(3, 0);

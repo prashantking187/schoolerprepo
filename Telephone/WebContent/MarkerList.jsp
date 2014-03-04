@@ -22,8 +22,9 @@ overflow: auto;
     			</div>
     			<div class="modal-footer">
     				<div class="buttons">
+    					<button type="button" name="selectAll" class="btn btn-primary" style="float: left" data-loading-text="Selecting...">Select All</button>
         				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        					<button type="button" name="deleteMarker" class="btn btn-primary" data-loading-text="Saving...">Delete</button>
+        				<button type="button" name="deleteMarker" class="btn btn-primary" data-loading-text="Saving...">Delete</button>
         			</div>
       				</div>
     	</div><!-- /.modal-content -->
