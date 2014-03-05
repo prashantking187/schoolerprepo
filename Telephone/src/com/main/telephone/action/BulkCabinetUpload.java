@@ -130,7 +130,7 @@ public class BulkCabinetUpload extends HttpServlet  {
 			
 			switch (cellCount) {
 			case 0:
-				markerinfo[0]=Double.toString(cell.getNumericCellValue());	
+				markerinfo[0]=cell.toString();	
 				cellCount++;
 				break;
 			case 1:

@@ -296,13 +296,14 @@ if(request.getAttribute("userAlertBulk")!=null)
 			$('form[name=addMarkerForm]').submit(function(){
 			
 				var markername=$(this).find('input[name=markername]').val();
+				var locationName=$(this).find('input[name=locationName]').val();
 				var lat=$(this).find('input[name=lat]').val();
 				var lng=$(this).find('input[name=lng]').val();
 			
 				$.ajax(
 						{
 							url:"updates",
-							data:{"method":"addMarker","markername":markername,"lat":lat,"lng":lng},
+							data:{"method":"addMarker","markername":markername,"lat":lat,"lng":lng,"locationName":locationName},
 							success:function(data){
 								$('button[data-dismiss="modal"]:visible').trigger('click');
 								var dataArray=data.split("~");
@@ -470,7 +471,7 @@ if(request.getAttribute("userAlertBulk")!=null)
   						<div class="form-group">
       						 <label for ="markername" class="col-lg-4 control-label" > Select file to upload:</label>
        							<div class="col-lg-8">
-       								<input type="file" accept="application/vnd.ms-excel"  class="form-control"  id="file" name="file" placeholder="Upload File" required="required"/>
+       								<input type="file"  class="form-control"  id="file" name="file" placeholder="Upload File" required="required"/>
        							</div>
        					</div>
        					
