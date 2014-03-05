@@ -33,10 +33,10 @@
 		border-radius:10px 10px 0px 0px;
 		top: 0px;
 		width: 85%;
-		height: 45px;
-		background: #2A3333;
+		height: 55px;
+		#background: #2A3333;
 		margin: 0px auto;
-		padding-top: .5em;
+		padding-top: .1em;
 		padding-right: 1em;
 		
 		}
@@ -108,8 +108,9 @@
 		
 	.logo_top_left{
 position: absolute;
-top: 10px;
-left: 5px;
+top: 15px;
+left: 500px;
+z-index: 100;
 background: url("images/logo_Symbol_Icon.png") no-repeat;
 background-size: contain;
 width: 50px;
@@ -216,7 +217,7 @@ $('button[name=mainMenu]').on('click',function(){
    <body>
 		<div class="container">
 				<div class="logo_top_left"><span style="white-space: nowrap;
-				font-size: 7px;
+				font-size: 12px;
 				color: #019DDD;
 				left: 50px;
 				top: 30px;
