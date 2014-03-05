@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cabinet Tracker login</title>
+<title>Mobily FDH Monitoring Station login</title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,8 +56,8 @@ position: absolute;
 height: auto;
 padding: 2em;
 width: 400px;
-border: 4px solid rgb(191, 191, 209);
-background: url("images/grey_white_bg.jpg") no-repeat;
+border: 0px solid rgb(191, 191, 209);
+
 background-size:150%;
 color: black;
 }
@@ -65,7 +65,7 @@ color: black;
 
 position: absolute;
 background: url("images/login_logo_left.jpg") no-repeat;
-background-size: 70% 100%;
+background-size: 60% 100%;
 width: 100%;
 top: 0px;
 height: 100%;
@@ -170,7 +170,7 @@ padding: .5em;"/><span style="color:#019DDD">MOBILY FDH MONITORING SYSTEM</span>
   <div class="form-group">
     <div class="col-sm-7">
       <button type="submit" class="btn btn-primary">Sign in</button>
-    </div>
+    </div><br><br>
     <div class="col-sm-7">
       <img alt="logo" src="images/rm.png" style="width: 100px;
 height: 50px;
