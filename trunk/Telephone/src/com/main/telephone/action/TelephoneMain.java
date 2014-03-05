@@ -2,13 +2,14 @@ package com.main.telephone.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.sql.Types;
 
 import javax.annotation.Resource;
@@ -71,6 +72,7 @@ public class TelephoneMain extends HttpServlet  {
 	         String humidity = rs.getString("humidity");
 	         String door_status = rs.getString("door_stat");
 	         String location_name = rs.getString("location_name");
+	         Timestamp updateInfo = rs.getTimestamp("update_info");
 	         JSONObject objJson=new JSONObject();
 	 		
 	     	
@@ -83,7 +85,9 @@ public class TelephoneMain extends HttpServlet  {
 	 	    objJson.accumulate("flood_status", flood_stat);
 	 	    objJson.accumulate("humidity", humidity);
 	 	   objJson.accumulate("door_status", door_status);
-	 	  objJson.accumulate("location_name", location_name);
+	 	   objJson.accumulate("location_name", location_name);
+	 	  objJson.accumulate("updateInfo", updateInfo.toString());
+	 	 
 	 	   
 
 	 	    objarray.add(objJson);
@@ -160,6 +164,7 @@ if(req.getParameter("markerInfo")!=null && !"".equalsIgnoreCase(req.getParameter
 	         String humidity = rs.getString("humidity");
 	         String door_status = rs.getString("door_stat");
 	         String location_name = rs.getString("location_name");
+	         Timestamp updateInfo = rs.getTimestamp("update_info");
 	         JSONObject objJson=new JSONObject();
 	 		
 	     	
@@ -173,6 +178,8 @@ if(req.getParameter("markerInfo")!=null && !"".equalsIgnoreCase(req.getParameter
 	 	    objJson.accumulate("humidity", humidity);
 	 	   objJson.accumulate("door_status", door_status);
 	 	  objJson.accumulate("location_name", location_name);
+	 	 objJson.accumulate("updateInfo", updateInfo.toString());
+	 	 
 	 	  
 	 	 
 	 	    
@@ -326,7 +333,7 @@ public void addMarker(HttpServletRequest req, HttpServletResponse resp) throws S
 		locationName=req.getParameter("locationName");
 	
 	
-	String query="insert into cabinet_inf values(?,?,?,?,?,?,?,?,?,?,?)";
+	String query="insert into cabinet_inf values(?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 	PreparedStatement stmt=conn.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
 	String defaultStat="Y";
@@ -341,6 +348,8 @@ public void addMarker(HttpServletRequest req, HttpServletResponse resp) throws S
 	stmt.setFloat(9, new Float(0.0));
 	stmt.setString(10, defaultStat);
 	stmt.setString(11, locationName);
+	java.util.Date date= new java.util.Date();
+	stmt.setTimestamp(12,new Timestamp(date.getTime()));
 
 	int result=stmt.executeUpdate();
 	

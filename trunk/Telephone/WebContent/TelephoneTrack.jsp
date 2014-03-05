@@ -174,6 +174,7 @@ height: 50px
     		<thead style="background: rgb(238, 149, 35);color: black;" >
     			<tr>
     				<th>Cabinet Name/ID</th>
+					<th>Location Name</th>
     				<th>Door Status</th>
     				<th>Smoke Status</th>
     				<th>Flood Status</th>
@@ -183,6 +184,7 @@ height: 50px
     		<tbody>
     			<tr>
     				<td style="text-align:center">{{cabinetid}}</td>
+					<td style="text-align:center">{{locationName}}</td>
     				<td style="text-align:center">{{doorstatus}}</td>
     				<td style="text-align:center">{{smokestatus}}</td>
     				<td style="text-align:center">{{floodstatus}}</td>
@@ -191,6 +193,8 @@ height: 50px
     
     </tbody>
     </table>
+<div><span style="float: right;
+margin-top: -15px;">Last updated on :{{lastUpdatedInfo}}</span></div>
 </div>
 		</script>
 		<script>
@@ -268,7 +272,8 @@ $('button[name=mainMenu]').on('click',function(){
    $.fn.clearAll=function(){
 	   
 	 var elements=  $(this).find('input[type=text]');
-	 elements.val('');
+	 //confirm($(this).find('input[type=text]').length);
+	elements.val('');
 	   
    }
 	//default ajax call	
@@ -288,7 +293,7 @@ $('button[name=mainMenu]').on('click',function(){
         				var self=this;
         				//writing click function
         				$(the_map).dblclick(function(event){
-        				$('#markerAdd').clearAll();
+        				$('form[name=addMarkerForm]').clearAll();
         				var latLng=event.latLng;
 
         				if(latLng!=null && latLng!="")
@@ -394,6 +399,8 @@ $('button[name=mainMenu]').on('click',function(){
 			var door_status=this.door_status;
 			var humidity=this.humidity;
 			var boothname=this.boothname;
+			var locationName=this.location_name;
+			var updateInfo=this.updateInfo;
 			
 			if(door_status=='N' || smoke_status=='N' || flood_status=='N'){
 				image=imageRed;
@@ -402,7 +409,7 @@ $('button[name=mainMenu]').on('click',function(){
 				image=imageGreen;
 			}
 			
-			var tempHTML=	prepareHTML(boothname,boothid,statusToImage(door_status),statusToImage(smoke_status),statusToImage(flood_status),humidity);
+			var tempHTML=	prepareHTML(boothname,boothid,statusToImage(door_status),statusToImage(smoke_status),statusToImage(flood_status),humidity,locationName,updateInfo);
 			 
 			
 			var infobox = new InfoBox({
@@ -458,12 +465,14 @@ $.each(markers,function(i){
       		 	getBoothStat();//first call to get all the markers
 
 			});
-            function prepareHTML(boothname,boothid,door_status,smoke_status,flood_status,humidity){
+            function prepareHTML(boothname,boothid,door_status,smoke_status,flood_status,humidity,locationName,updateInfo){
 
        		 var tempHTML=$('<div id="wrapper" />');
 			 
 			 var template=$.trim($('#infoWindowTemplate').html());
 			 template=template.replace(/{{cabinetid}}/,boothname)
+			 				  .replace(/{{locationName}}/,locationName)
+			 				   .replace(/{{lastUpdatedInfo}}/,updateInfo)
 			 				  .replace(/{{doorstatus}}/,door_status)
 			 				  .replace(/{{smokestatus}}/,smoke_status)
 			 				  .replace(/{{floodstatus}}/,flood_status)
@@ -483,8 +492,8 @@ $.each(markers,function(i){
 				var flood_status=data.flood_status;
 				var door_status=data.door_status;
 				var humidity=data.humidity;
-			
-				
+				var locationName=data.location_name;
+				var updateInfo=data.updateInfo;
 				
 				var boothname=data.boothname;
 				if(door_status=='N' || smoke_status=='N' || flood_status=='N'){
@@ -505,7 +514,7 @@ $.each(markers,function(i){
 					  });
 				 //confirm(boothid+","+status);
 				 
-				var tempHTML=	prepareHTML(boothname,boothid,statusToImage(door_status),statusToImage(smoke_status),statusToImage(flood_status),humidity);
+				var tempHTML=	prepareHTML(boothname,boothid,statusToImage(door_status),statusToImage(smoke_status),statusToImage(flood_status),humidity,locationName,updateInfo);
 				 
 				
 				var infobox = new InfoBox({
