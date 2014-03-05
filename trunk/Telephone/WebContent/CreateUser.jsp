@@ -3,7 +3,7 @@
 <%@page import="com.main.telephone.DTO.UserInfoBean"%>
 <html lang="en">
    <head>
-		<title>Cabinet tracker</title>
+		<title>Mobily FDH Monitoring Station</title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta http-equiv="content-language" content="en" />
@@ -146,8 +146,9 @@ padding:1em;
 }
 .logo_top_left{
 position: absolute;
-top: 10px;
-left: 5px;
+top: 15px;
+left: 500px;
+z-index:100;
 background: url("images/logo_Symbol_Icon.png") no-repeat;
 background-size: contain;
 width: 50px;
