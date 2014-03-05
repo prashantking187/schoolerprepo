@@ -4,7 +4,7 @@
     pageEncoding="ISO-8859-1"%>
 <html lang="en">
    <head>
-		<title>Cabinet tracker</title>
+		<title>Mobily FDH Monitoring Stattion</title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta http-equiv="content-language" content="en" />
@@ -35,6 +35,18 @@
 		width: 85%;
 		height: 55px;
 		#background: #2A3333;
+		
+		background: #E3E7E7; /* Old browsers */
+		background: -moz-linear-gradient(top,  #E3E7E7 50%, #9D9FA5 81%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#E3E7E7), color-stop(81%,#9D9FA5)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* IE10+ */
+		background: linear-gradient(to bottom,  #E3E7E7 50%,#9D9FA5 81%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E3E7E7', endColorstr='#9D9FA5',GradientType=0 ); /* IE6-9 */
+		
+		
+		
 		margin: 0px auto;
 		padding-top: .1em;
 		padding-right: 1em;
@@ -50,7 +62,7 @@
 		text-align: left;
 		padding-left:2em;
 		padding-top:3em;
-		color:#fff;
+		color:#019DDD;
 		}
 		.dark label:FIRST-LETTER{
 		
