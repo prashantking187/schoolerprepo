@@ -280,6 +280,7 @@ $('button[name=mainMenu]').on('click',function(){
     //default markers
     
     var markers=[];
+    var infoBoxes=[];
     
     
     var mapObj;
@@ -433,6 +434,7 @@ $('button[name=mainMenu]').on('click',function(){
 				 maxWidth: 150,
 				 pixelOffset: new google.maps.Size(-140, 0),
 				 zIndex: null,
+				 id:boothid,
 				 boxStyle: {
 				    background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
 				    opacity: 0.75,
@@ -443,7 +445,7 @@ $('button[name=mainMenu]').on('click',function(){
 				infoBoxClearance: new google.maps.Size(1, 1)
 				});
 
-			 
+		
 			//markers.push(marker);
         	
         	
@@ -451,13 +453,11 @@ $('button[name=mainMenu]').on('click',function(){
 $.each(markers,function(i){
 	if(boothid==this.id){
 		//confirm(status);
-	var marker=markers[i];		
+	var marker=markers[i];
+	//Checking whtr the infowindow already exists... if so jst update the content
+		infoBoxes[i].setContent(tempHTML);
 		marker.setIcon(image);
-		google.maps.event.clearListeners(marker,'click');
-		google.maps.event.addListener(marker, 'click', function() {
-			 infobox.open(mapObj,marker);
-		});
-		
+
 	}
 });
 
@@ -536,6 +536,7 @@ $.each(markers,function(i){
 					 content: tempHTML,
 					 disableAutoPan: false,
 					 maxWidth: 150,
+					 id:boothid,
 					 pixelOffset: new google.maps.Size(-140, 0),
 					 zIndex: null,
 					 boxStyle: {
@@ -552,7 +553,7 @@ $.each(markers,function(i){
 					 infobox.open(the_map,this);
 					});
 				markers.push(marker);
-            	
+				infoBoxes.push(infobox);
             	
             	
             }
