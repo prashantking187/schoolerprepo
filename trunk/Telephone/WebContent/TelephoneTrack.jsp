@@ -34,16 +34,15 @@
 		top: 0px;
 		width: 85%;
 		height: 55px;
-		#background: #2A3333;
-		
-		background: #E3E7E7; /* Old browsers */
-		background: -moz-linear-gradient(top,  #E3E7E7 50%, #9D9FA5 81%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#E3E7E7), color-stop(81%,#9D9FA5)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* IE10+ */
-		background: linear-gradient(to bottom,  #E3E7E7 50%,#9D9FA5 81%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E3E7E7', endColorstr='#9D9FA5',GradientType=0 ); /* IE6-9 */
+		background: #2A3333;
+		background: rgb(105, 114, 105); /* Old browsers */
+		background: -moz-linear-gradient(top,  rgb(105, 114, 105) 50%, #45474C 81%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgb(105, 114, 105)), color-stop(81%,#45474C)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  rgb(105, 114, 105) 50%,#45474C 81%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  rgb(105, 114, 105) 50%,#45474C 81%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  rgb(105, 114, 105) 50%,#45474C 81%); /* IE10+ */
+		background: linear-gradient(to bottom,rgb(105, 114, 105) 50%,#45474C 81%)/* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(105, 114, 105)', endColorstr='#45474C',GradientType=0 ); /* IE6-9 */
 		
 		
 		
@@ -58,11 +57,14 @@
 		}
 		.dark span{
 		
-		font:1em;
-		text-align: left;
-		padding-left:2em;
-		padding-top:3em;
-		color:#019DDD;
+		font-size: 1em;
+text-align: left;
+left: 2em;
+top: .8em;
+padding-top: 6em;
+color:#529DDF;
+margin-top: 50em;
+position: relative;
 		}
 		.dark label:FIRST-LETTER{
 		
@@ -239,10 +241,10 @@ $('button[name=mainMenu]').on('click',function(){
 		<header class="dark">
 			<span >Welcome <label> <%=userName %></label></span>
 		
-			<button class="btn btn-sm btn-primary" type="submit" style="float:right" name="signout" >Sign out</button>
+			<button class="btn btn-sm btn-primary" type="submit" style="float:right;margin-top:1em" name="signout" >Sign out</button>
 			<% 
 			if(role==1){%>
-			<button class="btn btn-sm btn-primary" type="submit" style="margin-right:2em;float:right" name="mainMenu" >Main Menu</button>
+			<button class="btn btn-sm btn-primary" type="submit" style="margin-right:2em;float:right;margin-top:1em" name="mainMenu" >Main Menu</button>
 			<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addMarker" href="#modal" name="markerAdd" id="markerAdd" style="display:none" >Show modal</button>
 			<%}%>
 		</header>
