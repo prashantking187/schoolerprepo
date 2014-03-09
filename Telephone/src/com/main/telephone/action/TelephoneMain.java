@@ -345,8 +345,8 @@ public void addMarker(HttpServletRequest req, HttpServletResponse resp) throws S
 	stmt.setString(6, status);
 	stmt.setString(7, defaultStat);
 	stmt.setString(8, defaultStat);
-	stmt.setFloat(9, new Float(0.0));
-	stmt.setString(10, defaultStat);
+	stmt.setFloat(10, new Float(0.0));
+	stmt.setString(9, defaultStat);
 	stmt.setString(11, locationName);
 	java.util.Date date= new java.util.Date();
 	stmt.setTimestamp(12,new Timestamp(date.getTime()));
