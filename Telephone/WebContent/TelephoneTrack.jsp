@@ -193,7 +193,7 @@ height: 50px
     				<th>Door Status</th>
     				<th>Smoke Status</th>
     				<th>Flood Status</th>
-					<th>Humidity</th>
+					<th>Battery Level</th>
     			</tr>
     		</thead>
     		<tbody>
