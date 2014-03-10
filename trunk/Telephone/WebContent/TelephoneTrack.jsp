@@ -389,7 +389,7 @@ $('button[name=mainMenu]').on('click',function(){
         			$.each(data,function(evt,map){    		
         			prepareMarkers(this,the_map);
         			});
-        			var latlng=new google.maps.LatLng('21.0000','78.0000');
+        			var latlng=new google.maps.LatLng('24.6994617','46.7120218');
         			the_map.setCenter(latlng);
         			mapObj=the_map;
         			});
