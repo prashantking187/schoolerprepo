@@ -96,14 +96,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E3E7E7', end
 }
 .widget{
 
-
-width: 80px;
-height: 100px;
+width: 160px;
+height: 200px;
 float: left;
 list-style: none;
-margin-right: 30px;
+margin-left: 60px;
+margin-right: 70px;
 margin-top: 20px;
 text-align: center;
+
 
 }
 .spantext{
@@ -378,17 +379,17 @@ if(request.getAttribute("userAlertBulk")!=null)
 		</header>
 		<div class="widgetContainer">
 		<!-- <ul class="widgetElement">
-		<li class="widget"><a data-toggle="modal" data-target="#addUser" href="#mymodal"><img src="images/add-user.png" /><span>Add User</span></a></li>
-		<li class="widget"><a data-toggle="modal" data-target="#addMarker" href="#modal"><img src="images/add-marker.png" /><span>Add Cabinet</span></a></li>
-			<li class="widget"><a href="TelephoneTrack.jsp"><img src="images/images.jpg" /><span>Street Cabinet Monitoring System</span></a></li>
-			<li class="widget"><a href="http://fibernet.dyndns.info:8085/cgi-bin/reports"><img src="images/reports-icon.png" /><span>Report</span></a></li>
+		<li class="widget"><a data-toggle="modal" data-target="#addUser" href="#mymodal"><img src="images/add-user.png" /><span><br>Add User</span></a></li>
+		<li class="widget"><a data-toggle="modal" data-target="#addMarker" href="#modal"><img src="images/add-marker.png" /><span><br>Add Cabinet</span></a></li>
+		<li class="widget"><a href="TelephoneTrack.jsp"><img src="images/images.jpg" /><span>Street Cabinet Monitoring System</span></a></li>
+		<li class="widget"><a href="http://fibernet.dyndns.info:8085/cgi-bin/reports"><img src="images/reports-icon.png" /><span>Report</span></a></li>
 		</ul>
 		
 		 -->
 		 <ul class="widgetElement">
-		 <li class="widget"><a data-toggle="modal" data-target="#addUser" href="#mymodal"><span class="imageClass" ><img src="images/add-user.png" /></span><span  class="spantext">Add User</span></a></li>
-		<li class="widget"><a data-toggle="modal" data-target="#addMarker" href="#modal"><span class="imageClass" ><img src="images/add-marker.png" /></span><span  class="spantext">Add Single Cabinet</span></a></li>
-		<li class="widget"><a data-toggle="modal" data-target="#bulkUploadMarker" href="#modal"><span class="imageClass" ><img src="images/add-marker.png" /></span><span  class="spantext">Add Multiple Cabinets</span></a></li>
+		 <li class="widget"><a data-toggle="modal" data-target="#addUser" href="#mymodal"><span class="imageClass" ><img src="images/add-user.png" /></span><span  class="spantext"><br>Add User</span></a></li>
+		<li class="widget"><a data-toggle="modal" data-target="#addMarker" href="#modal"><span class="imageClass" ><img src="images/add-marker.png" /></span><span  class="spantext"><br>Add Single Cabinet</span></a></li>
+		<li class="widget"><a data-toggle="modal" data-target="#bulkUploadMarker" href="#modal"><span class="imageClass" ><img src="images/multiplemarker.png" /></span><span  class="spantext"><br>Add Multiple Cabinets</span></a></li>
 			<li class="widget"><a href="TelephoneTrack.jsp"><span class="imageClass" ><img src="images/lcd-monitor-icon.png" /></span><span  class="spantext">Mobily FDH Monitoring System</span></a></li>
 			<li class="widget"><a href="http://fibernet.dyndns.info:8085/cgi-bin/reports"><span class="imageClass" ><img src="images/reports-icon.png" /></span><span  class="spantext">Report</span></a></li>
 			<li class="widget"><a data-toggle="modal" data-target="#markerLst" href="#modal"><span class="imageClass" ><img src="images/delete_icon_blue.ico" /></span><span  class="spantext">Delete Cabinet</span></a></li>
