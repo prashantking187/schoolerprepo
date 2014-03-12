@@ -101,10 +101,9 @@ height: 200px;
 float: left;
 list-style: none;
 margin-left: 60px;
-margin-right: 70px;
+margin-right: 30px;
 margin-top: 20px;
 text-align: center;
-
 
 }
 .spantext{
@@ -315,6 +314,52 @@ if(request.getAttribute("userAlertBulk")!=null)
 				
 				location.href="updates?method=logoff";
 			});
+			$('#editConfButton').on('click',function(){
+
+				var $numDivDefault=$(this).closest('form').find('.defaultNumDiv').children('div');
+				
+				$numDivDefault.find('label,input').toggleClass('hide');
+			//	$numDivDefault.find('input').toogleClass('hide');
+				//va$()
+				var temp=$(this);
+				$(this).addClass('hide');
+				$(this).next().removeClass('hide').click(function(){
+				var confNum=$(this).closest('form').find('input[name=confNum]').val();
+				
+				
+				$.ajax(
+				{
+					url:"updates",
+					cache:false,
+					data:{"method":"editConf","confNum":confNum},
+					success:function(data){
+						
+						var tempNum=Math.random();
+						$('button[data-dismiss="modal"]:visible').trigger('click');
+						var dataArray=data.split("~");
+						if(dataArray[0]=="200"){
+							bootbox.alert("<img src='images/Success.png' />"+dataArray[1]);	
+							$numDivDefault.find('label').html(dataArray[2]);
+							
+						}
+						else if(dataArray[0]=="204")
+							bootbox.alert("<img src='images/Error.png' />"+dataArray[1]);
+
+						temp.removeClass('hide');
+						temp.next().addClass('hide');
+						$numDivDefault.find('input').addClass('hide');
+						$numDivDefault.find('label').removeClass('hide');
+						
+					}
+					
+					
+				}
+						
+				);
+				});	
+		//	return false;
+				
+				});
 			
 		});
 		</script>
@@ -322,7 +367,8 @@ if(request.getAttribute("userAlertBulk")!=null)
 	
 		UserInfoBean objUserInfo=null;
 		String userName="";
-		int role=-1;
+		 int role=-1;
+		 String emgyNum="";
 		System.out.println("asdasd");
 		if(session.getAttribute("userInfo")!=null){
 			objUserInfo=(UserInfoBean)session.getAttribute("userInfo");
@@ -330,6 +376,8 @@ if(request.getAttribute("userAlertBulk")!=null)
 				userName=objUserInfo.getUsername();
 			if(objUserInfo.getRole()!=0)
 			role=objUserInfo.getRole();	
+			if(objUserInfo.getEmgyNum()!=null)
+				emgyNum=objUserInfo.getEmgyNum();
 			
 		}
 		else
@@ -337,7 +385,7 @@ if(request.getAttribute("userAlertBulk")!=null)
 			request.setAttribute("userAlert", "3~Session Expired.Please login to continue!!!");
 			RequestDispatcher dispatch=request.getRequestDispatcher("/");
 			dispatch.forward(request, response);
-		}
+		} 
 		
 
 		%>
@@ -379,20 +427,21 @@ if(request.getAttribute("userAlertBulk")!=null)
 		</header>
 		<div class="widgetContainer">
 		<!-- <ul class="widgetElement">
-		<li class="widget"><a data-toggle="modal" data-target="#addUser" href="#mymodal"><img src="images/add-user.png" /><span><br>Add User</span></a></li>
-		<li class="widget"><a data-toggle="modal" data-target="#addMarker" href="#modal"><img src="images/add-marker.png" /><span><br>Add Cabinet</span></a></li>
-		<li class="widget"><a href="TelephoneTrack.jsp"><img src="images/images.jpg" /><span>Street Cabinet Monitoring System</span></a></li>
-		<li class="widget"><a href="http://fibernet.dyndns.info:8085/cgi-bin/reports"><img src="images/reports-icon.png" /><span>Report</span></a></li>
+		<li class="widget"><a data-toggle="modal" data-target="#addUser" href="#mymodal"><img src="images/add-user.png" /><span>Add User</span></a></li>
+		<li class="widget"><a data-toggle="modal" data-target="#addMarker" href="#modal"><img src="images/add-marker.png" /><span>Add Cabinet</span></a></li>
+			<li class="widget"><a href="TelephoneTrack.jsp"><img src="images/images.jpg" /><span>Street Cabinet Monitoring System</span></a></li>
+			<li class="widget"><a href="http://fibernet.dyndns.info:8085/cgi-bin/reports"><img src="images/reports-icon.png" /><span>Report</span></a></li>
 		</ul>
 		
 		 -->
 		 <ul class="widgetElement">
-		 <li class="widget"><a data-toggle="modal" data-target="#addUser" href="#mymodal"><span class="imageClass" ><img src="images/add-user.png" /></span><span  class="spantext"><br>Add User</span></a></li>
-		<li class="widget"><a data-toggle="modal" data-target="#addMarker" href="#modal"><span class="imageClass" ><img src="images/add-marker.png" /></span><span  class="spantext"><br>Add Single Cabinet</span></a></li>
-		<li class="widget"><a data-toggle="modal" data-target="#bulkUploadMarker" href="#modal"><span class="imageClass" ><img src="images/multiplemarker.png" /></span><span  class="spantext"><br>Add Multiple Cabinets</span></a></li>
+		 <li class="widget"><a data-toggle="modal" data-target="#addUser" href="#mymodal"><span class="imageClass" ><img src="images/add-user.png" /></span><span  class="spantext">Add User</span></a></li>
+		<li class="widget"><a data-toggle="modal" data-target="#addMarker" href="#modal"><span class="imageClass" ><img src="images/add-marker.png" /></span><span  class="spantext">Add Single Cabinet</span></a></li>
+		<li class="widget"><a data-toggle="modal" data-target="#bulkUploadMarker" href="#modal"><span class="imageClass" ><img src="images/add-marker.png" /></span><span  class="spantext">Add Multiple Cabinets</span></a></li>
 			<li class="widget"><a href="TelephoneTrack.jsp"><span class="imageClass" ><img src="images/lcd-monitor-icon.png" /></span><span  class="spantext">Mobily FDH Monitoring System</span></a></li>
 			<li class="widget"><a href="http://fibernet.dyndns.info:8085/cgi-bin/reports"><span class="imageClass" ><img src="images/reports-icon.png" /></span><span  class="spantext">Report</span></a></li>
 			<li class="widget"><a data-toggle="modal" data-target="#markerLst" href="#modal"><span class="imageClass" ><img src="images/delete_icon_blue.ico" /></span><span  class="spantext">Delete Cabinet</span></a></li>
+			<li class="widget"><a data-toggle="modal" data-target="#editSettings" href="#modal"><span class="imageClass" ><img src="images/cogwheel.png" /></span><span  class="spantext">Settings</span></a></li>
 			
 		</ul>
 		 <div class="roleList" ></div>
@@ -476,7 +525,37 @@ if(request.getAttribute("userAlertBulk")!=null)
   	</div><!-- /.modal-dialog -->
 </div>
 		<!-- bulkUploadMarkers ends -->
-
+		<!-- Edit Settings starts -->
+			<div class="modal fade" id="editSettings" tabindex="-1" role="dialog" aria-labelledby="editSettings" aria-hidden="true">
+  		<div class="modal-dialog">
+    		<div class="modal-content">
+    			<form class="form-horizontal" name="editConfForm" method="post" action="bulkUpload" enctype="multipart/form-data">
+     				 <div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        					<h4 class="modal-title" id="editSettingsTitle"><img src="images/cogwheel.png" width="30px" height="30px"/></h4>
+      				</div>
+      				<div class="modal-body">
+  						<div class="form-group defaultNumDiv">
+      						 <label for ="markername" class="col-lg-6 control-label" > Emergency SMS Number:</label>
+       							<div class="col-lg-6">
+       								 <label class="col-lg-4 control-label defaultNumber" ><%=emgyNum %></span></label>								 
+       								<input type="text" class="form-control hide" id="confNum" name="confNum" placeholder="Emergency SMS Number" value=<%=emgyNum %> required="required" />
+       							</div>
+       					</div>
+       					
+      				</div>
+      				<div class="modal-footer">
+        					<button type="button"  name="editConfButton" id="editConfButton" class="btn btn-primary" data-loading-text="Editting...">Edit</button>
+        					<button type="button"  name="saveConf" id=" saveConf" class="btn btn-primary hide" data-loading-text="Saving...">Save</button>
+      				</div>
+      		</form>
+    	</div><!-- /.modal-content -->
+  	</div><!-- /.modal-dialog -->
 </div>
+<!-- Edit Settings ends -->
+</div>
+<style>
+.defaultNumber{color:#529DDF }
+</style>
 		</body>
 </html>

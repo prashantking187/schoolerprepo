@@ -345,8 +345,8 @@ public void addMarker(HttpServletRequest req, HttpServletResponse resp) throws S
 	stmt.setString(6, status);
 	stmt.setString(7, defaultStat);
 	stmt.setString(8, defaultStat);
-	stmt.setFloat(10, new Float(0.0));
-	stmt.setString(9, defaultStat);
+	stmt.setFloat(9, new Float(0.0));
+	stmt.setString(10, defaultStat);
 	stmt.setString(11, locationName);
 	java.util.Date date= new java.util.Date();
 	stmt.setTimestamp(12,new Timestamp(date.getTime()));
@@ -419,6 +419,40 @@ String query="insert into user_inf values(?,?,?,?)";
 
 	conn.close();
 }
+public  void editConf(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException{
+
+	
+	Connection conn=ds.getConnection();
+	String emgyNum="";
+	
+	
+	if(req.getParameter("confNum")!=null && !"".equalsIgnoreCase(req.getParameter("confNum")))
+		emgyNum=req.getParameter("confNum");
+
+	
+	if(!"".equalsIgnoreCase(emgyNum)){
+	
+	String query="UPDATE cabinet_conf SET CONF_VAL=? WHERE CONF_ID=?";
+	
+	PreparedStatement stmt=conn.prepareStatement(query);
+	stmt.setString(1,emgyNum);
+	stmt.setInt(2,1);
+	
+	stmt.execute();
+	PrintWriter outPrintWriter=resp.getWriter();
+	outPrintWriter.append("200~Settings saved successfully!!~"+emgyNum);
+	outPrintWriter.flush();
+
+	conn.close();
+	}
+	else{
+		
+		PrintWriter outPrintWriter=resp.getWriter();
+		outPrintWriter.append("204~Invalid value!!");
+		outPrintWriter.flush();
+	}
+		
+}
 @Override
 protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 		throws ServletException, IOException {
@@ -428,7 +462,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 		try {
 		if(req.getParameter("method").equals("addMarker"))
 				addMarker(req,resp);
-		if(req.getParameter("method").equals("delMarker"))
+		else if(req.getParameter("method").equals("delMarker"))
 			deleteMarker(req,resp);
 		
 		else if(req.getParameter("method").equals("addUser"))
@@ -441,6 +475,8 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 				dispatch.forward(req, resp);
 			
 				}
+		else if(req.getParameter("method").equals("editConf"))
+			editConf(req,resp);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				PrintWriter outPrintWriter=resp.getWriter();

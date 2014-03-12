@@ -80,6 +80,7 @@ public class LoginAction extends HttpServlet{
 		    	int role=rs.getInt("role");
 		    	objUserInfoBean.setRole(role);
 		    	
+		    	getEmgyNum(req, resp, objUserInfoBean);
 		    	req.getSession().setAttribute("userInfo", objUserInfoBean);
 		    	saveUserInfo(req, resp ,objUserInfoBean);
 		    	if(role == 0)
@@ -125,5 +126,21 @@ public class LoginAction extends HttpServlet{
 		st1.execute();
 		conn.close();
 	}
+	public void getEmgyNum(HttpServletRequest req, HttpServletResponse resp,UserInfoBean objUserInfoBean) throws SQLException{
+		Connection conn=ds.getConnection();
+		String query="select conf_val from cabinet_conf where conf_id=?";
+		PreparedStatement  st1=conn.prepareStatement(query);
+		st1.setInt(1, 1);
+		ResultSet rs=st1.executeQuery();
+		String currentEmgyNum="";
+		while(rs.next()){
+			
+			currentEmgyNum=rs.getString("conf_val");
+			
+		}
+		conn.close();
+		objUserInfoBean.setEmgyNum(currentEmgyNum);
+	}
+	
 	
 }
