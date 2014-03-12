@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <%@page import="com.main.telephone.DTO.UserInfoBean"%>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
    <head>
 		<title>Mobily FDH Monitoring Station</title>
 		<meta charset="utf-8" />
@@ -96,11 +96,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E3E7E7', end
 }
 .widget{
 
-width: 160px;
-height: 200px;
+
+width: 80px;
+height: 100px;
 float: left;
 list-style: none;
-margin-left: 60px;
 margin-right: 30px;
 margin-top: 20px;
 text-align: center;
@@ -155,7 +155,19 @@ width: 100px;
 height: 50px
 
 }
+.settings{
 
+float: right;
+height: 35px;
+width: 35px;
+cursor: pointer;
+margin-right: 20px;
+}
+#settings:hover {
+	
+	background: #D5CECE;
+	border-radius:10px;
+}
 		</style>
 	<%
 String alertBulk="";
@@ -423,7 +435,8 @@ if(request.getAttribute("userAlertBulk")!=null)
 		<div class="container">
 		<header class="dark">
 			<span >Welcome <label><%=userName %></label></span>
-			<button class="btn btn-sm btn-primary" type="submit" style="float:right" name="signout" >Sign out</button>
+			<button class="btn btn-sm btn-primary signout" type="submit" style="float:right" name="signout" >Sign out</button>
+			<img src="images/cogwheel.png"  data-toggle="modal" data-target="#editSettings" href="#modal" class="settings" id="settings" ></img>
 		</header>
 		<div class="widgetContainer">
 		<!-- <ul class="widgetElement">
@@ -441,7 +454,7 @@ if(request.getAttribute("userAlertBulk")!=null)
 			<li class="widget"><a href="TelephoneTrack.jsp"><span class="imageClass" ><img src="images/lcd-monitor-icon.png" /></span><span  class="spantext">Mobily FDH Monitoring System</span></a></li>
 			<li class="widget"><a href="http://fibernet.dyndns.info:8085/cgi-bin/reports"><span class="imageClass" ><img src="images/reports-icon.png" /></span><span  class="spantext">Report</span></a></li>
 			<li class="widget"><a data-toggle="modal" data-target="#markerLst" href="#modal"><span class="imageClass" ><img src="images/delete_icon_blue.ico" /></span><span  class="spantext">Delete Cabinet</span></a></li>
-			<li class="widget"><a data-toggle="modal" data-target="#editSettings" href="#modal"><span class="imageClass" ><img src="images/cogwheel.png" /></span><span  class="spantext">Settings</span></a></li>
+			
 			
 		</ul>
 		 <div class="roleList" ></div>
