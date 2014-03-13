@@ -159,7 +159,12 @@ height: 50px
     -webkit-box-shadow: 0 0  8px #000;
     box-shadow: 0 0 8px #000;
 }
+.reports{
 
+height:50px;
+width:50px;
+cursor:pointer;
+}
 		</style>
 		<%
 		UserInfoBean objUserInfo=null;
@@ -193,7 +198,7 @@ height: 50px
     				<th>Door Status</th>
     				<th>Smoke Status</th>
     				<th>Flood Status</th>
-					<th>Battery Level</th>
+					<th>Humidity</th>
     			</tr>
     		</thead>
     		<tbody>
@@ -240,13 +245,15 @@ $('button[name=mainMenu]').on('click',function(){
 		<div class="logo_bottom_right"></div>
 		<header class="dark">
 			<span >Welcome <label> <%=userName %></label></span>
-		
+			
 			<button class="btn btn-sm btn-primary" type="submit" style="float:right;margin-top:1em" name="signout" >Sign out</button>
 			<% 
 			if(role==1){%>
 			<button class="btn btn-sm btn-primary" type="submit" style="margin-right:2em;float:right;margin-top:1em" name="mainMenu" >Main Menu</button>
 			<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addMarker" href="#modal" name="markerAdd" id="markerAdd" style="display:none" >Show modal</button>
+			<img src="images/reports-icon.png" class="reports" style="margin-right:2em;float:right;" alt="Reports" title="Reports"></img>
 			<%}%>
+				
 		</header>
 		
 					<div id="map_canvas" class="map rounded"></div>
@@ -389,7 +396,7 @@ $('button[name=mainMenu]').on('click',function(){
         			$.each(data,function(evt,map){    		
         			prepareMarkers(this,the_map);
         			});
-        			var latlng=new google.maps.LatLng('24.6994617','46.7120218');
+        			var latlng=new google.maps.LatLng('21.0000','78.0000');
         			the_map.setCenter(latlng);
         			mapObj=the_map;
         			});
@@ -478,6 +485,10 @@ $.each(markers,function(i){
             	
             	$('#map_canvas').html('<center><img src="images/ajax-loader.gif" /></center>');//default loading image
       		 	getBoothStat();//first call to get all the markers
+      		 	$('.reports').click(function(){
+
+			location.href="http://fibernet.dyndns.info:8085/cgi-bin/reports";
+          		 	});
 
 			});
             function prepareHTML(boothname,boothid,door_status,smoke_status,flood_status,humidity,locationName,updateInfo){

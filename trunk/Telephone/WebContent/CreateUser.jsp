@@ -321,7 +321,12 @@ if(request.getAttribute("userAlertBulk")!=null)
 				
 				return false;
 			});
-			
+
+			$('button[name=goToMap]').click(function(){
+
+				location.href="TelephoneTrack.jsp"
+				});
+				
 			$('button[name=signout]').on('click',function(){
 				
 				location.href="updates?method=logoff";
