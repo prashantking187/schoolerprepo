@@ -128,18 +128,22 @@ public class LoginAction extends HttpServlet{
 	}
 	public void getEmgyNum(HttpServletRequest req, HttpServletResponse resp,UserInfoBean objUserInfoBean) throws SQLException{
 		Connection conn=ds.getConnection();
-		String query="select conf_val from cabinet_conf where conf_id=?";
-		PreparedStatement  st1=conn.prepareStatement(query);
-		st1.setInt(1, 1);
-		ResultSet rs=st1.executeQuery();
-		String currentEmgyNum="";
+		String query="select * from cabinet_conf ";
+		Statement  st1=conn.createStatement();
+		ResultSet rs=st1.executeQuery(query);
+		
 		while(rs.next()){
-			
-			currentEmgyNum=rs.getString("conf_val");
-			
+				String confId="";
+				String confVal="";
+				confId=rs.getString("conf_id");
+				confVal=rs.getString("conf_val");
+			if(confId.equalsIgnoreCase("1"))
+				objUserInfoBean.setEmgyNum(confVal);
+			else if(confId.equalsIgnoreCase("2"))
+				objUserInfoBean.setEmgyEmail(confVal);		
 		}
 		conn.close();
-		objUserInfoBean.setEmgyNum(currentEmgyNum);
+
 	}
 	
 	

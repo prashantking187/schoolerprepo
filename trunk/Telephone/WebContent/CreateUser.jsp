@@ -168,6 +168,13 @@ margin-right: 20px;
 	background: #D5CECE;
 	border-radius:10px;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+.defaultEmailLabel,.defaultNumberLabel{color:#529DDF }
 		</style>
 	<%
 String alertBulk="";
@@ -333,37 +340,37 @@ if(request.getAttribute("userAlertBulk")!=null)
 			});
 			$('#editConfButton').on('click',function(){
 
-				var $numDivDefault=$(this).closest('form').find('.defaultNumDiv').children('div');
-				
+			var $numDivDefault=$(this).closest('form').find('.defaultNumDiv,.defaultEmailDiv').children('div');
 				$numDivDefault.find('label,input').toggleClass('hide');
-			//	$numDivDefault.find('input').toogleClass('hide');
-				//va$()
-				var temp=$(this);
 				$(this).addClass('hide');
-				$(this).next().removeClass('hide').click(function(){
-				var confNum=$(this).closest('form').find('input[name=confNum]').val();
-				
+				$(this).next().removeClass('hide');
+				});
+			$('form[name=editConfForm]').submit(function(){
+
+				var confNum=$(this).find('input[name=confNum]').val();
+				var confEmail=$(this).find('input[name=confEmail]').val();
+				var $numDivDefault=$(this).closest('form').find('.defaultNumDiv,.defaultEmailDiv').children('div');
+				//$numDivDefault.find('label,input').toggleClass('hide');
 				
 				$.ajax(
 				{
 					url:"updates",
 					cache:false,
-					data:{"method":"editConf","confNum":confNum},
+					data:{"method":"editConf","confNum":confNum,"confEmail":confEmail},
 					success:function(data){
-						
-						var tempNum=Math.random();
 						$('button[data-dismiss="modal"]:visible').trigger('click');
 						var dataArray=data.split("~");
 						if(dataArray[0]=="200"){
 							bootbox.alert("<img src='images/Success.png' />"+dataArray[1]);	
-							$numDivDefault.find('label').html(dataArray[2]);
+							$numDivDefault.find('.defaultNumberLabel').html(dataArray[2]);
+							$numDivDefault.find('.defaultEmailLabel').html(dataArray[3]);
 							
 						}
 						else if(dataArray[0]=="204")
 							bootbox.alert("<img src='images/Error.png' />"+dataArray[1]);
 
-						temp.removeClass('hide');
-						temp.next().addClass('hide');
+						$('#editConfButton').removeClass('hide');
+						$('#editConfButton').next().addClass('hide');
 						$numDivDefault.find('input').addClass('hide');
 						$numDivDefault.find('label').removeClass('hide');
 						
@@ -373,10 +380,10 @@ if(request.getAttribute("userAlertBulk")!=null)
 				}
 						
 				);
+				return false;
 				});	
-		//	return false;
-				
-				});
+			
+			
 			
 		});
 		</script>
@@ -386,6 +393,7 @@ if(request.getAttribute("userAlertBulk")!=null)
 		String userName="";
 		 int role=-1;
 		 String emgyNum="";
+		 String emgyEmail="";
 		System.out.println("asdasd");
 		if(session.getAttribute("userInfo")!=null){
 			objUserInfo=(UserInfoBean)session.getAttribute("userInfo");
@@ -395,6 +403,8 @@ if(request.getAttribute("userAlertBulk")!=null)
 			role=objUserInfo.getRole();	
 			if(objUserInfo.getEmgyNum()!=null)
 				emgyNum=objUserInfo.getEmgyNum();
+			if(objUserInfo.getEmgyEmail()!=null)
+				emgyEmail=objUserInfo.getEmgyEmail();
 			
 		}
 		else
@@ -556,15 +566,22 @@ if(request.getAttribute("userAlertBulk")!=null)
   						<div class="form-group defaultNumDiv">
       						 <label for ="markername" class="col-lg-6 control-label" > Emergency SMS Number:</label>
        							<div class="col-lg-6">
-       								 <label class="col-lg-4 control-label defaultNumber" ><%=emgyNum %></span></label>								 
-       								<input type="text" class="form-control hide" id="confNum" name="confNum" placeholder="Emergency SMS Number" value=<%=emgyNum %> required="required" />
+       								 <label class="col-lg-4 control-label defaultNumberLabel" ><%=emgyNum %></span></label>								 
+       								<input type="number" class="form-control hide" id="confNum" name="confNum" placeholder="Emergency SMS Number" value=<%=emgyNum %> required="required" />
+       							</div>
+       					</div>
+       						<div class="form-group defaultEmailDiv">
+      						 <label for ="markername" class="col-lg-6 control-label" > Emergency Email ID:</label>
+       							<div class="col-lg-6">
+       								 <label class="col-lg-4 control-label defaultEmailLabel" ><%=emgyEmail %></span></label>								 
+       								<input type="email" class="form-control hide" id="confEmail" name="confEmail" placeholder="Emergency Email id" value=<%=emgyEmail %> required="required" />
        							</div>
        					</div>
        					
       				</div>
       				<div class="modal-footer">
         					<button type="button"  name="editConfButton" id="editConfButton" class="btn btn-primary" data-loading-text="Editting...">Edit</button>
-        					<button type="button"  name="saveConf" id=" saveConf" class="btn btn-primary hide" data-loading-text="Saving...">Save</button>
+        					<button type="submit"  name="saveConf" id=" saveConf" class="btn btn-primary hide" data-loading-text="Saving...">Save</button>
       				</div>
       		</form>
     	</div><!-- /.modal-content -->
@@ -572,8 +589,6 @@ if(request.getAttribute("userAlertBulk")!=null)
 </div>
 <!-- Edit Settings ends -->
 </div>
-<style>
-.defaultNumber{color:#529DDF }
-</style>
+
 		</body>
 </html>

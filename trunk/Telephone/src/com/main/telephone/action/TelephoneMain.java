@@ -424,35 +424,32 @@ public  void editConf(HttpServletRequest req, HttpServletResponse resp) throws S
 	
 	Connection conn=ds.getConnection();
 	String emgyNum="";
+	String emgyEmail="";
 	
 	
 	if(req.getParameter("confNum")!=null && !"".equalsIgnoreCase(req.getParameter("confNum")))
 		emgyNum=req.getParameter("confNum");
+	if(req.getParameter("confEmail")!=null && !"".equalsIgnoreCase(req.getParameter("confEmail")))
+		emgyEmail=req.getParameter("confEmail");
+	
+	String query="Update phone.cabinet_conf set CONF_VAL= case"
+			+ " when CONF_ID='1' then ?"
+			+ "when CONF_ID='2' then ?"
+			+ "end where CONF_ID in ('1','2');";
+	PreparedStatement stmt=null;
 
-	
-	if(!"".equalsIgnoreCase(emgyNum)){
-	
-	String query="UPDATE cabinet_conf SET CONF_VAL=? WHERE CONF_ID=?";
-	
-	PreparedStatement stmt=conn.prepareStatement(query);
+	stmt=conn.prepareStatement(query);
 	stmt.setString(1,emgyNum);
-	stmt.setInt(2,1);
-	
+	stmt.setString(2,emgyEmail);
 	stmt.execute();
+	conn.close();
 	PrintWriter outPrintWriter=resp.getWriter();
-	outPrintWriter.append("200~Settings saved successfully!!~"+emgyNum);
+	outPrintWriter.append("200~Settings saved successfully!!~"+emgyNum+"~"+emgyEmail);
 	outPrintWriter.flush();
 
-	conn.close();
+
 	}
-	else{
-		
-		PrintWriter outPrintWriter=resp.getWriter();
-		outPrintWriter.append("204~Invalid value!!");
-		outPrintWriter.flush();
-	}
-		
-}
+
 @Override
 protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 		throws ServletException, IOException {

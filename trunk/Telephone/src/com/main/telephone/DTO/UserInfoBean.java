@@ -6,6 +6,7 @@ public class UserInfoBean {
 	private String username;
 	private int role;
 	private String emgyNum;
+	private String emgyEmail;
 	
 	public int getUser_id() {
 		return user_id;
@@ -30,6 +31,12 @@ public class UserInfoBean {
 	}
 	public void setEmgyNum(String emgyNum) {
 		this.emgyNum = emgyNum;
+	}
+	public String getEmgyEmail() {
+		return emgyEmail;
+	}
+	public void setEmgyEmail(String emgyEmail) {
+		this.emgyEmail = emgyEmail;
 	}
 	
 }
