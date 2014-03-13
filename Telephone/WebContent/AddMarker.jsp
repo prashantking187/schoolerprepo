@@ -36,6 +36,7 @@
          
       				</div>
       				<div class="modal-footer">
+      					<button type="button" class="btn btn-primary" style="float:left" name="goToMap" id="goToMap" data-loading-text="Routing....">Add from map</button>
         				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         					<button type="submit" class="btn btn-primary" data-loading-text="Saving...">Save</button>
       				</div>
