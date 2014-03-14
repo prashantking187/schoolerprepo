@@ -572,9 +572,9 @@ $.each(markers,function(i){
             	
             	
             	if(status=='Y')
-            		return '<img src="images/Circle_Green.png" />';
+            		return '<img src="images/CirclerGreen.png" />';
             	else
-            		return '<img src="images/Circle_Red.png" />';
+            		return '<img src="images/CirclerRed.png" />';
             }
         </script>
       	
