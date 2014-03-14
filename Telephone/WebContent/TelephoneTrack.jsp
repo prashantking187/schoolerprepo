@@ -247,11 +247,13 @@ $('button[name=mainMenu]').on('click',function(){
 			<span >Welcome <label> <%=userName %></label></span>
 			
 			<button class="btn btn-sm btn-primary" type="submit" style="float:right;margin-top:1em" name="signout" >Sign out</button>
+			
 			<% 
 			if(role==1){%>
 			<button class="btn btn-sm btn-primary" type="submit" style="margin-right:2em;float:right;margin-top:1em" name="mainMenu" >Main Menu</button>
 			<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addMarker" href="#modal" name="markerAdd" id="markerAdd" style="display:none" >Show modal</button>
 			<img src="images/reports-icon.png" class="reports" style="margin-right:2em;float:right;" alt="Reports" title="Reports"></img>
+			<img src="images/help.png" class="reports" style="margin-right:2em;float:right;" alt="Reports" title="Reports"></img>
 			<%}%>
 				
 		</header>
@@ -425,11 +427,11 @@ $('button[name=mainMenu]').on('click',function(){
 			var locationName=this.location_name;
 			var updateInfo=this.updateInfo;
 			
-			if(door_status=='N' || smoke_status=='N' || flood_status=='N'){
-				image=imageRed;
+			if(door_status=='Y' || smoke_status=='Y' || flood_status=='Y'){
+				image=imageGreen;
 			}
 			else{
-				image=imageGreen;
+				image=imageRed;
 			}
 			
 			var tempHTML=	prepareHTML(boothname,boothid,statusToImage(door_status),statusToImage(smoke_status),statusToImage(flood_status),humidity,locationName,updateInfo);
@@ -487,7 +489,7 @@ $.each(markers,function(i){
       		 	getBoothStat();//first call to get all the markers
       		 	$('.reports').click(function(){
 
-			location.href="http://fibernet.dyndns.info:8085/cgi-bin/reports";
+			location.href="/cgi-bin/reports";
           		 	});
 
 			});
