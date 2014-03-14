@@ -453,13 +453,14 @@ if(request.getAttribute("userAlertBulk")!=null)
 			<span >Welcome <label><%=userName %></label></span>
 			<button class="btn btn-sm btn-primary signout" type="submit" style="float:right" name="signout" >Sign out</button>
 			<img src="images/cogwheel.png"  data-toggle="modal" data-target="#editSettings" href="#modal" class="settings" id="settings" ></img>
+			<img src="images/help.png"  data-toggle="modal" data-target="#editSettings" href="#modal" class="settings" id="settings" ></img>
 		</header>
 		<div class="widgetContainer">
 		<!-- <ul class="widgetElement">
 		<li class="widget"><a data-toggle="modal" data-target="#addUser" href="#mymodal"><img src="images/add-user.png" /><span>Add User</span></a></li>
 		<li class="widget"><a data-toggle="modal" data-target="#addMarker" href="#modal"><img src="images/add-marker.png" /><span>Add Cabinet</span></a></li>
 			<li class="widget"><a href="TelephoneTrack.jsp"><img src="images/images.jpg" /><span>Street Cabinet Monitoring System</span></a></li>
-			<li class="widget"><a href="http://fibernet.dyndns.info:8085/cgi-bin/reports"><img src="images/reports-icon.png" /><span>Report</span></a></li>
+			<li class="widget"><a href="/cgi-bin/reports"><img src="images/reports-icon.png" /><span>Report</span></a></li>
 		</ul>
 		
 		 -->
@@ -468,7 +469,7 @@ if(request.getAttribute("userAlertBulk")!=null)
 		<li class="widget"><a data-toggle="modal" data-target="#addMarker" href="#modal"><span class="imageClass" ><img src="images/add-marker.png" /></span><span  class="spantext"><br>Add Single Cabinet</span></a></li>
 		<li class="widget"><a data-toggle="modal" data-target="#bulkUploadMarker" href="#modal"><span class="imageClass" ><img src="images/multiplemarker.png" /></span><span  class="spantext"><br>Add Multiple Cabinets</span></a></li>
 			<li class="widget"><a href="TelephoneTrack.jsp"><span class="imageClass" ><img src="images/lcd-monitor-icon.png" /></span><span  class="spantext">Mobily FDH Monitoring System</span></a></li>
-			<li class="widget"><a href="http://fibernet.dyndns.info:8085/cgi-bin/reports"><span class="imageClass" ><img src="images/reports-icon.png" /></span><span  class="spantext">Report</span></a></li>
+			<li class="widget"><a href="/cgi-bin/reports"><span class="imageClass" ><img src="images/reports-icon.png" /></span><span  class="spantext">Report</span></a></li>
 			<li class="widget"><a data-toggle="modal" data-target="#markerLst" href="#modal"><span class="imageClass" ><img src="images/delete_icon_blue.ico" /></span><span  class="spantext">Delete Cabinet</span></a></li>
 			
 			
