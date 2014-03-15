@@ -176,6 +176,15 @@ input::-webkit-inner-spin-button {
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 .defaultEmailLabel,.defaultNumberLabel{color:#529DDF }
+.dark img{
+
+width:35px !important;
+height:35px !important;
+margin-right: 1em;
+float: right;
+margin-top: .5em;
+cursor:pointer;
+}
 		</style>
 	<%
 String alertBulk="";
@@ -335,10 +344,10 @@ if(request.getAttribute("userAlertBulk")!=null)
 				location.href="TelephoneTrack.jsp"
 				});
 			$('img[name=goToMap]').tooltip();
-			$('button[name=signout]').on('click',function(){
+			$('img[name=signout]').on('click',function(){
 				
 				location.href="updates?method=logoff";
-			});
+			}).tooltip();
 			$('#editConfButton').on('click',function(){
 
 			var $numDivDefault=$(this).closest('form').find('.defaultNumDiv,.defaultEmailDiv').children('div');
@@ -451,7 +460,7 @@ if(request.getAttribute("userAlertBulk")!=null)
 		<div class="container">
 		<header class="dark">
 			<span >Welcome <label><%=userName %></label></span>
-			<button class="btn btn-sm btn-primary signout" type="submit" style="float:right" name="signout" >Sign out</button>
+			<img class="signout" src="images/Log-Out-icon.png" style="float:right" name="signout" data-toggle="tooltip" data-placement="top" title="Sign Out" />
 			<img src="images/cogwheel.png"  data-toggle="modal" data-target="#editSettings" href="#modal" class="settings" id="settings" ></img>
 			<img src="images/help.png"  data-toggle="modal" data-target="#userHelp" href="#modal" class="settings" id="settings" ></img>
 		</header>
@@ -469,7 +478,7 @@ if(request.getAttribute("userAlertBulk")!=null)
 		<li class="widget"><a data-toggle="modal" data-target="#addMarker" href="#modal"><span class="imageClass" ><img src="images/add-marker.png" /></span><span  class="spantext"><br>Add Single Cabinet</span></a></li>
 		<li class="widget"><a data-toggle="modal" data-target="#bulkUploadMarker" href="#modal"><span class="imageClass" ><img src="images/multiplemarker.png" /></span><span  class="spantext"><br>Add Multiple Cabinets</span></a></li>
 			<li class="widget"><a href="TelephoneTrack.jsp"><span class="imageClass" ><img src="images/lcd-monitor-icon.png" /></span><span  class="spantext">Mobily FDH Monitoring System</span></a></li>
-			<li class="widget"><a href="/cgi-bin/reports"><span class="imageClass" ><img src="images/reports-icon.png" /></span><span  class="spantext">Report</span></a></li>
+			<li class="widget"><a href="http://fibernet.dyndns.info:8085/cgi-bin/reports"><span class="imageClass" ><img src="images/reports-icon.png" /></span><span  class="spantext">Report</span></a></li>
 			<li class="widget"><a data-toggle="modal" data-target="#markerLst" href="#modal"><span class="imageClass" ><img src="images/delete_icon_blue.ico" /></span><span  class="spantext">Delete Cabinet</span></a></li>
 			
 			

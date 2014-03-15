@@ -13,8 +13,7 @@
 		  <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
   <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-   <script type="text/javascript" src="js/bootbox.min.js"></script>
+ 
 		<style>
 		body{
 			overflow-y:hidden;
@@ -165,6 +164,15 @@ height:50px;
 width:50px;
 cursor:pointer;
 }
+.dark img{
+
+width:35px !important;
+height:35px !important;
+margin-right: 1em;
+float: right;
+margin-top: .8em;
+cursor:pointer;
+}
 		</style>
 		<%
 		UserInfoBean objUserInfo=null;
@@ -219,15 +227,17 @@ margin-top: -15px;">Last updated on :{{lastUpdatedInfo}}</span></div>
 		</script>
 		<script>
 		$(function(){
-$('button[name=signout]').on('click',function(){
+$('img[name=signout]').on('click',function(){
 				
 				location.href="updates?method=logoff";
 			});
+		
 			
-$('button[name=mainMenu]').on('click',function(){
+$('img[name=mainMenu]').on('click',function(){
 	
 	location.href="CreateUser.jsp";
 });
+
 
 		});
 		
@@ -246,14 +256,15 @@ $('button[name=mainMenu]').on('click',function(){
 		<header class="dark">
 			<span >Welcome <label> <%=userName %></label></span>
 			
-			<button class="btn btn-sm btn-primary" type="submit" style="float:right;margin-top:1em" name="signout" >Sign out</button>
+			<img src="images/Log-Out-icon.png" style="float:right;margin-top:1em;" name="signout"  data-toggle="tooltip" data-placement="top" title="Sign Out"/>
 			
 			<% 
 			if(role==1){%>
-			<button class="btn btn-sm btn-primary" type="submit" style="margin-right:2em;float:right;margin-top:1em" name="mainMenu" >Main Menu</button>
-			<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addMarker" href="#modal" name="markerAdd" id="markerAdd" style="display:none" >Show modal</button>
-			<img src="images/reports-icon.png" class="reports" style="margin-right:2em;float:right;" alt="Reports" title="Reports"></img>
-			<img src="images/help.png" class="reports" style="margin-right:2em;float:right;" alt="Reports" title="Reports"></img>
+			
+			<img src="images/home.png"  alt="Main Menu" name="mainMenu"  data-toggle="tooltip" data-placement="top" title="Main Menu" ></img>
+			<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addMarker"  href="#modal" name="markerAdd" id="markerAdd" style="display:none" >Show modal</button>
+			<img src="images/reports-icon.png" class="reports"  data-toggle="tooltip" data-placement="top"  alt="Reports" title="Reports" ></img>
+			<img src="images/help.png" class="reports" alt="Reports"  data-toggle="tooltip" data-placement="top" title="Help" ></img>
 			<%}%>
 				
 		</header>
@@ -271,7 +282,10 @@ $('button[name=mainMenu]').on('click',function(){
 		<script type="text/javascript" src="ui/jquery.ui.map.services.js"></script>
 		<script type="text/javascript" src="ui/jquery.ui.map.extensions.js"></script>
 		<script type="text/javascript" src="js/eventsource.js"></script>
+		 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="js/bootbox.min.js"></script>
 		<script type="text/javascript" src="js/infobox.js"></script>
+		
 		<script type="text/javascript">
 		
 	
@@ -490,8 +504,10 @@ $.each(markers,function(i){
       		 	$('.reports').click(function(){
 
 			location.href="/cgi-bin/reports";
+			
           		 	});
-
+      		 	$('img[name=goToMap]').tooltip();
+      		 	$('.dark img').tooltip();
 			});
             function prepareHTML(boothname,boothid,door_status,smoke_status,flood_status,humidity,locationName,updateInfo){
 
