@@ -292,11 +292,12 @@ if(request.getAttribute("userAlertBulk")!=null)
 				var username=$(this).find('input[name=username]').val();
 				var password=$(this).find('input[name=password]').val();
 				var role=$(this).find('select[name=role]').val();
+				var email=$(this).find('input[name=email]').val();
 				
 				$.ajax(
 				{
 					url:"updates",
-					data:{"method":"addUser","username":username,"password":password,"role":role},
+					data:{"method":"addUser","username":username,"password":password,"role":role,"email":email},
 					success:function(data){
 						$('button[data-dismiss="modal"]:visible').trigger('click');
 						var dataArray=data.split("~");
@@ -519,6 +520,12 @@ if(request.getAttribute("userAlertBulk")!=null)
 						      </select>
       						</div>
        					</div> 
+       					<div class="form-group">
+       						<label for ="username" class="col-lg-3 control-label" > Email :</label>
+       						<div class="col-lg-9">
+      							 <input type="email" class="form-control" id="email" name="email" placeholder="Email id" required="required"/>
+      						 </div>
+      			 		</div> 
          
       				</div>
       				<div class="modal-footer">

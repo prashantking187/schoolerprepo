@@ -579,6 +579,9 @@ $.each(markers,function(i){
 					});
 
 				 $(marker).click(function() {
+					 $.each(infoBoxes,function(i){
+						 infoBoxes[i].close();
+					 });
 					 infobox.open(the_map,this);
 					});
 				markers.push(marker);

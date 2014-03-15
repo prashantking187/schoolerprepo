@@ -390,6 +390,7 @@ public void addUser(HttpServletRequest req, HttpServletResponse resp) throws NoS
 	
 	String password="";
 	
+	String email="";
 	Connection conn=ds.getConnection();
 	int role=0;
 	
@@ -399,16 +400,19 @@ public void addUser(HttpServletRequest req, HttpServletResponse resp) throws NoS
 		password=req.getParameter("password");
 	if(req.getParameter("role")!=null && !"".equalsIgnoreCase(req.getParameter("role")))
 		role=Integer.valueOf(req.getParameter("role"));
+	if(req.getParameter("email")!=null && !"".equalsIgnoreCase(req.getParameter("email")))
+		email=req.getParameter("email");
 	
 	StringBuffer sb=PhoneUtil.addMD5(password);
 	
-String query="insert into user_inf values(?,?,?,?)";
+String query="insert into user_inf values(?,?,?,?,?)";
 	
 	PreparedStatement stmt=conn.prepareStatement(query);
 	stmt.setNull(1,Types.INTEGER);
 	stmt.setString(2, username);
 	stmt.setString(3, sb.toString());
 	stmt.setInt(4, role);
+	stmt.setString(5, email);
 
 	stmt.execute();
 	
