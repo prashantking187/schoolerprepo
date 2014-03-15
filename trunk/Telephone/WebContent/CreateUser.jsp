@@ -330,11 +330,11 @@ if(request.getAttribute("userAlertBulk")!=null)
 				return false;
 			});
 
-			$('button[name=goToMap]').click(function(){
+			$('img[name=goToMap]').click(function(){
 
 				location.href="TelephoneTrack.jsp"
 				});
-				
+			$('img[name=goToMap]').tooltip();
 			$('button[name=signout]').on('click',function(){
 				
 				location.href="updates?method=logoff";
@@ -453,7 +453,7 @@ if(request.getAttribute("userAlertBulk")!=null)
 			<span >Welcome <label><%=userName %></label></span>
 			<button class="btn btn-sm btn-primary signout" type="submit" style="float:right" name="signout" >Sign out</button>
 			<img src="images/cogwheel.png"  data-toggle="modal" data-target="#editSettings" href="#modal" class="settings" id="settings" ></img>
-			<img src="images/help.png"  data-toggle="modal" data-target="#editSettings" href="#modal" class="settings" id="settings" ></img>
+			<img src="images/help.png"  data-toggle="modal" data-target="#userHelp" href="#modal" class="settings" id="settings" ></img>
 		</header>
 		<div class="widgetContainer">
 		<!-- <ul class="widgetElement">
@@ -572,13 +572,7 @@ if(request.getAttribute("userAlertBulk")!=null)
        								<input type="number" class="form-control hide" id="confNum" name="confNum" placeholder="Emergency SMS Number" value=<%=emgyNum %> required="required" />
        							</div>
        					</div>
-       						<div class="form-group defaultEmailDiv">
-      						 <label for ="markername" class="col-lg-6 control-label" > Emergency Email ID:</label>
-       							<div class="col-lg-6">
-       								 <label class="col-lg-4 control-label defaultEmailLabel" ><%=emgyEmail %></span></label>								 
-       								<input type="email" class="form-control hide" id="confEmail" name="confEmail" placeholder="Emergency Email id" value=<%=emgyEmail %> required="required" />
-       							</div>
-       					</div>
+       						
        					
       				</div>
       				<div class="modal-footer">
@@ -590,6 +584,9 @@ if(request.getAttribute("userAlertBulk")!=null)
   	</div><!-- /.modal-dialog -->
 </div>
 <!-- Edit Settings ends -->
+<!-- Help -->
+	<jsp:include page="UserHelp.jsp" />
+<!-- Help ends-->
 </div>
 
 		</body>
