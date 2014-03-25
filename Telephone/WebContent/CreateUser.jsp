@@ -32,16 +32,14 @@
 		top: 0px;
 		width: 85%;
 		height: 55px;
-		/*background: #2A3333;*/
-		background: rgb(105, 114, 105); /* Old browsers */
-		background: -moz-linear-gradient(top,  rgb(105, 114, 105) 50%, #45474C 81%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgb(105, 114, 105)), color-stop(81%,#45474C)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top,  rgb(105, 114, 105) 50%,#45474C 81%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top,  rgb(105, 114, 105) 50%,#45474C 81%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top,  rgb(105, 114, 105) 50%,#45474C 81%); /* IE10+ */
-		background: linear-gradient(to bottom,rgb(105, 114, 105) 50%,#45474C 81%)/* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(105, 114, 105)', endColorstr='#45474C',GradientType=0 ); /* IE6-9 */
-		
+				background: #E3E7E7; /* Old browsers */
+background: -moz-linear-gradient(top,  #E3E7E7 50%, #9D9FA5 81%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#E3E7E7), color-stop(81%,#9D9FA5)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* IE10+ */
+background: linear-gradient(to bottom,  #E3E7E7 50%,#9D9FA5 81%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E3E7E7', endColorstr='#9D9FA5',GradientType=0 ); /* IE6-9 */
 		
 		
 		margin: 0px auto;
@@ -454,7 +452,7 @@ if(request.getAttribute("userAlertBulk")!=null)
 			font-size: 12px;
 			color: #019DDD;
 			left: 50px;
-			top: 30px;
+			top: 15px;
 			position: absolute;
 			text-transform: uppercase;">Mobily FDH Monitoring System</span></div>
 		<div class="logo_bottom_right"></div>
@@ -479,7 +477,7 @@ if(request.getAttribute("userAlertBulk")!=null)
 		<li class="widget"><a data-toggle="modal" data-target="#addMarker" href="#modal"><span class="imageClass" ><img src="images/add-marker.png" /></span><span  class="spantext"><br>Add Single Cabinet</span></a></li>
 		<li class="widget"><a data-toggle="modal" data-target="#bulkUploadMarker" href="#modal"><span class="imageClass" ><img src="images/multiplemarker.png" /></span><span  class="spantext"><br>Add Multiple Cabinets</span></a></li>
 			<li class="widget"><a href="TelephoneTrack.jsp"><span class="imageClass" ><img src="images/lcd-monitor-icon.png" /></span><span  class="spantext">Mobily FDH Monitoring System</span></a></li>
-			<li class="widget"><a href="http://fibernet.dyndns.info:8085/cgi-bin/reports"><span class="imageClass" ><img src="images/reports-icon.png" /></span><span  class="spantext">Report</span></a></li>
+			<li class="widget"><a href="/cgi-bin/reports"><span class="imageClass" ><img src="images/reports-icon.png" /></span><span  class="spantext">Report</span></a></li>
 			<li class="widget"><a data-toggle="modal" data-target="#markerLst" href="#modal"><span class="imageClass" ><img src="images/delete_icon_blue.ico" /></span><span  class="spantext">Delete Cabinet</span></a></li>
 			
 			

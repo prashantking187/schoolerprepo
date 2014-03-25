@@ -33,16 +33,15 @@
 		top: 0px;
 		width: 85%;
 		height: 55px;
-		background: #2A3333;
-		background: rgb(105, 114, 105); /* Old browsers */
-		background: -moz-linear-gradient(top,  rgb(105, 114, 105) 50%, #45474C 81%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgb(105, 114, 105)), color-stop(81%,#45474C)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top,  rgb(105, 114, 105) 50%,#45474C 81%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top,  rgb(105, 114, 105) 50%,#45474C 81%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top,  rgb(105, 114, 105) 50%,#45474C 81%); /* IE10+ */
-		background: linear-gradient(to bottom,rgb(105, 114, 105) 50%,#45474C 81%)/* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(105, 114, 105)', endColorstr='#45474C',GradientType=0 ); /* IE6-9 */
-		
+		background: #E3E7E7; /* Old browsers */
+background: -moz-linear-gradient(top,  #E3E7E7 50%, #9D9FA5 81%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#E3E7E7), color-stop(81%,#9D9FA5)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #E3E7E7 50%,#9D9FA5 81%); /* IE10+ */
+background: linear-gradient(to bottom,  #E3E7E7 50%,#9D9FA5 81%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E3E7E7', endColorstr='#9D9FA5',GradientType=0 ); /* IE6-9 */
+
 		
 		
 		margin: 0px auto;
@@ -204,9 +203,9 @@ cursor:pointer;
     				<th>Cabinet Name/ID</th>
 					<th>Location Name</th>
     				<th>Door Status</th>
-    				<th>Smoke Status</th>
+    				<th>Battery Status</th>
     				<th>Flood Status</th>
-					<th>Humidity</th>
+					<th>Battery Level</th>
     			</tr>
     		</thead>
     		<tbody>
@@ -249,7 +248,7 @@ $('img[name=mainMenu]').on('click',function(){
 				font-size: 12px;
 				color: #019DDD;
 				left: 50px;
-				top: 30px;
+				top: 15px;
 				position: absolute;
 				text-transform: uppercase;">Mobily FDH Monitoring System</span></div>
 		<div class="logo_bottom_right"></div>
@@ -264,7 +263,7 @@ $('img[name=mainMenu]').on('click',function(){
 			<img src="images/home.png"  alt="Main Menu" name="mainMenu"  data-toggle="tooltip" data-placement="top" title="Main Menu" ></img>
 			<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addMarker"  href="#modal" name="markerAdd" id="markerAdd" style="display:none" >Show modal</button>
 			<img src="images/reports-icon.png" class="reports"  data-toggle="tooltip" data-placement="top"  alt="Reports" title="Reports" ></img>
-			<img src="images/help.png" class="reports" alt="Reports"  data-toggle="tooltip" data-placement="top" title="Help" ></img>
+			<!-- <img src="images/help.png" class="reports" alt="Reports"  data-toggle="tooltip" data-placement="top" title="Help" ></img> -->
 			<%}%>
 				
 		</header>
